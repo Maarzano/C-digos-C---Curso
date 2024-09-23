@@ -1,5 +1,4 @@
 #include <iostream>
-
 using namespace std;
 
 int main() {
@@ -37,6 +36,5 @@ int main() {
     cout << "FGTS (11%) : R$ " << fgts << endl;
     cout << "Total de descontos : R$ " << totalDescontos << endl;
     cout << "Salário Líquido : R$ " << salarioLiquido << endl;
-
     return 0;
 }
