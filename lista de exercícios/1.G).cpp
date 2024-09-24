@@ -6,8 +6,8 @@ int main() {
     cout << "Digite o número da casa: ";
     cin >> numero_casa;
     cout << "Digite a rua: ";
-    cin.ignore();  // Limpa o buffer do cin
-    getline(cin, rua);  // Usa getline para permitir espaços
+    cin.ignore();
+    getline(cin, rua);
     cout << "Digite o bairro: ";
     getline(cin, bairro);
     cout << "Digite a cidade: ";
