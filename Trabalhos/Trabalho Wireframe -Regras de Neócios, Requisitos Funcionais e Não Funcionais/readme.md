@@ -17,7 +17,7 @@ O modelo conceitual de pacote turístico descreve os principais componentes envo
 
 ### Requisitos Funcionais - Pacote Turístico
 
-![Requisitos Funcionais - Pacote Turístico](https://github.com/Maarzano/C-digos-C---Curso/blob/main/Trabalhos/Trabalho%20Wireframe%20-Regras%20de%20Ne%C3%B3cios,%20Requisitos%20Funcionais%20e%20N%C3%A3o%20Funcionais/imagens/requisito%20funconal%20evento.png?raw=true))
+![Requisitos Funcionais - Pacote Turístico](https://github.com/Maarzano/C-digos-C---Curso/blob/main/Trabalhos/Trabalho%20Wireframe%20-Regras%20de%20Ne%C3%B3cios,%20Requisitos%20Funcionais%20e%20N%C3%A3o%20Funcionais/imagens/requisitos%20funcionais%20pacote%20turismo.png?raw=true)
 
 ### Requisitos Não Funcionais - Pacote Turístico
 
