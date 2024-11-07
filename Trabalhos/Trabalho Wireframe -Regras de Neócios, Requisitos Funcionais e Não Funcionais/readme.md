@@ -6,7 +6,7 @@ Este projeto tem como objetivo a aplicação de **regras de negócios**, **requi
 
 ### Modelo Conceitual: Pacote Turístico
 
-![Modelo Conceitual - Pacote Turístico](caminho/para/imagem-pacote-turistico.png)
+![Modelo Conceitual - Pacote Turístico](https://github.com/Maarzano/C-digos-C---Curso/blob/845cdfc046418e73bc174a72fc1e201e32dfe684/Trabalhos/Trabalho%20Wireframe%20-Regras%20de%20Ne%C3%B3cios,%20Requisitos%20Funcionais%20e%20N%C3%A3o%20Funcionais/imagens/modelo%20conceitual%20pacote%20tur%C3%ADstico.png)
 
 **Descrição**:  
 O modelo conceitual de pacote turístico descreve os principais componentes envolvidos na criação de pacotes para viagens. Ele define como os clientes poderão escolher destinos, pacotes, acomodações, transporte e outros serviços adicionais. As relações entre esses elementos e suas interações são representadas neste diagrama.
