@@ -2,6 +2,8 @@
 
 Este projeto tem como objetivo a aplicação de **regras de negócios**, **requisitos funcionais** e **não funcionais** a partir de dois **modelos conceituais**: um para **pacote turístico** e outro para **evento**. O trabalho consiste em adaptar esses modelos conceituais para o contexto de uma aplicação real, considerando as regras do negócio e os requisitos que devem ser atendidos. Além disso, o projeto inclui a criação de um **wireframe de baixa fidelidade** para visualização da estrutura da interface do usuário.
 
+**Integrantes do trabalho**: Arthur Augusto, Arthur Marzano, Carlos, Gabriel Arthur, Isaac, Juan, João Lucas, Bernardo 
+
 ## 1. Pacote de Viagens
 
 ### Modelo Conceitual: Pacote Turístico
