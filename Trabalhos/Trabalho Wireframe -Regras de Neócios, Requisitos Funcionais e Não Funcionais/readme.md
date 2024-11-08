@@ -13,7 +13,7 @@ O modelo conceitual de pacote turístico descreve os principais componentes envo
 
 ### Regras de Negócio para Pacote Turístico
 
-![Regras de Negócio - Pacote Turístico](caminho/para/imagem-regras-negocio-pacote-turistico.png)
+![Regras de Negócio - Pacote Turístico](https://github.com/Maarzano/C-digos-C---Curso/blob/main/Trabalhos/Trabalho%20Wireframe%20-Regras%20de%20Ne%C3%B3cios,%20Requisitos%20Funcionais%20e%20N%C3%A3o%20Funcionais/imagens/regra%20de%20neg%C3%B3cios%20pacote.png?raw=true)
 
 ### Requisitos Funcionais - Pacote Turístico
 
@@ -43,7 +43,7 @@ O modelo conceitual de evento abrange todos os aspectos de um evento, como a def
 
 ### Regras de Negócio para Evento
 
-![Regras de Negócio - Evento](caminho/para/imagem-regras-negocio-evento.png)
+![Regras de Negócio - Evento](https://github.com/Maarzano/C-digos-C---Curso/blob/main/Trabalhos/Trabalho%20Wireframe%20-Regras%20de%20Ne%C3%B3cios,%20Requisitos%20Funcionais%20e%20N%C3%A3o%20Funcionais/imagens/regra%20de%20neg%C3%B3cios%20evento.png?raw=true)
 
 ### Requisitos Funcionais - Evento
 
