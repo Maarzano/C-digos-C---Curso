@@ -25,7 +25,7 @@ O modelo conceitual de pacote turístico descreve os principais componentes envo
 
 ### Wireframe - Pacote Turístico
 
-![Wireframe - Pacote Turístico](caminho/para/imagem-wireframe-pacote-turistico.png)
+[Wireframe - Pacote Turístico](https://www.figma.com/proto/vXnHEqS2Wq1kIrxuHKs3Ir/WireFrame-Pacote-Tur%C3%ADstico?node-id=13-49&node-type=frame&t=fLhMbtrXBpHkbfBY-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=14%3A51)
 
 **Descrição**:  
 Este wireframe ilustra a interface de um sistema para compra de pacotes turísticos, incluindo a visualização de destinos, a escolha de serviços adicionais e a tela de pagamento.
@@ -55,7 +55,7 @@ O modelo conceitual de evento abrange todos os aspectos de um evento, como a def
 
 ### Wireframe - Evento
 
-![Wireframe - Evento](caminho/para/imagem-wireframe-evento.png)
+[Wireframe - Evento](https://www.figma.com/proto/anVR9sZMYKRZNOz3zK6oGh/WireFrame-Eventos?node-id=12-246&starting-point-node-id=12%3A246&t=Q3uqHOmyFbGdQ7jM-1)
 
 **Descrição**:  
 Este wireframe mostra como a interface do sistema de eventos será organizada. A tela apresenta a lista de atividades disponíveis, com a opção de inscrição para cada uma delas.
