@@ -58,7 +58,7 @@ O banco de dados da música tem como objetivo organizar e gerenciar as informaç
 
 ### Modelo Conceitual
 
-![Modelo Conceitual da Biblioteca](imagens/modelo_conceitual_biblioteca.png)
+![Modelo Conceitual da Biblioteca](https://github.com/Maarzano/C-digos-C---Curso/blob/bc02c4c822dafedb33b8c1a5d7efdda726749167/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Banco%20de%20dados%20e%20Modelos%20conceituais/DiagramaConceitual_db-BibliotecaOruam.png)
 
 #### Descrição do Modelo Conceitual:
 O banco de dados da biblioteca foi projetado para gerenciar as informações sobre livros, usuários e aluguel de computadores. O modelo conceitual é composto pelas seguintes entidades principais:
