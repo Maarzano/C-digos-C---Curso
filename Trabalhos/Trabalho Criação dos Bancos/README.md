@@ -18,7 +18,7 @@ O objetivo deste projeto é criar bancos de dados no SQL Server com base em mode
 
 ### Modelo Conceitual
 
-![Modelo Conceitual da Música](imagens/modelo_conceitual_musica.png)
+![Modelo Conceitual da Música](https://github.com/Maarzano/C-digos-C---Curso/blob/2ab8189da3c14c8f38ddf4ae63e2e0d485266fcc/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Banco%20de%20dados%20e%20Modelos%20conceituais/DiagramaConceitual_db-Musicas.png)
 
 #### Descrição do Modelo Conceitual:
 O banco de dados da música tem como objetivo organizar e gerenciar as informações sobre artistas, álbuns e músicas. O modelo conceitual é composto pelas seguintes entidades:
