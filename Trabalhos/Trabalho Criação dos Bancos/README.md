@@ -36,16 +36,16 @@ O banco de dados da música tem como objetivo organizar e gerenciar as informaç
 ### Tabelas do Banco de Dados
 
 #### Artistas
-![Tabela Artistas](imagens/tabela_artistas.png)
+![Tabela Artistas](https://github.com/Maarzano/C-digos-C---Curso/blob/adeec8205c6d1a32bbad0ee13f87469befbcee93/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Banco%20de%20dados%20e%20Modelos%20conceituais/Music_Table_Artistas.png)
 
 #### Músicas
-![Tabela Músicas](imagens/tabela_musicas.png)
+![Tabela Músicas](https://github.com/Maarzano/C-digos-C---Curso/blob/adeec8205c6d1a32bbad0ee13f87469befbcee93/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Banco%20de%20dados%20e%20Modelos%20conceituais/Music_Table_Musicas.png)
 
 #### Álbuns
-![Tabela Álbuns](imagens/tabela_albuns.png)
+![Tabela Álbuns](https://github.com/Maarzano/C-digos-C---Curso/blob/adeec8205c6d1a32bbad0ee13f87469befbcee93/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Banco%20de%20dados%20e%20Modelos%20conceituais/Music_Table_Album.png)
 
 #### Usuários
-![Tabela Usuários](imagens/tabela_usuarios.png)
+![Tabela Usuários](https://github.com/Maarzano/C-digos-C---Curso/blob/adeec8205c6d1a32bbad0ee13f87469befbcee93/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Banco%20de%20dados%20e%20Modelos%20conceituais/Music_Table_Usuarios.png)
 
 ### Relações de Chaves Primárias e Estrangeiras:
 - **Artista (PK)** → **Álbum (FK)**: A chave primária da tabela Artista (`artista_id`) é usada como chave estrangeira na tabela Albuns através da restrição de chave estrangeira FK_ArtistaID.
@@ -80,25 +80,25 @@ O banco de dados da biblioteca foi projetado para gerenciar as informações sob
 ### Tabelas do Banco de Dados
 
 #### Pessoas
-![Tabela Pessoas](imagens/tabela_pessoas.png)
+![Tabela Pessoas](https://github.com/Maarzano/C-digos-C---Curso/blob/adeec8205c6d1a32bbad0ee13f87469befbcee93/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Banco%20de%20dados%20e%20Modelos%20conceituais/Biblioteca_Table_Pessoas.png)
 
 #### Livros
-![Tabela Livros](imagens/tabela_livros.png)
+![Tabela Livros](https://github.com/Maarzano/C-digos-C---Curso/blob/adeec8205c6d1a32bbad0ee13f87469befbcee93/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Banco%20de%20dados%20e%20Modelos%20conceituais/Biblioteca_Table_Livros.png)
 
 #### Computadores
-![Tabela Computadores](imagens/tabela_computadores.png)
+![Tabela Computadores](https://github.com/Maarzano/C-digos-C---Curso/blob/adeec8205c6d1a32bbad0ee13f87469befbcee93/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Banco%20de%20dados%20e%20Modelos%20conceituais/Biblioteca_Table_Computadores.png)
 
 #### Compras
-![Tabela Compras](imagens/tabela_compras.png)
+![Tabela Compras](https://github.com/Maarzano/C-digos-C---Curso/blob/adeec8205c6d1a32bbad0ee13f87469befbcee93/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Banco%20de%20dados%20e%20Modelos%20conceituais/Biblioteca_Table_Compras.png)
 
 #### Aluguéis
-![Tabela Aluguéis](imagens/tabela_alugueis.png)
+![Tabela Aluguéis](https://github.com/Maarzano/C-digos-C---Curso/blob/adeec8205c6d1a32bbad0ee13f87469befbcee93/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Banco%20de%20dados%20e%20Modelos%20conceituais/Biblioteca_Table_Aluguel.png)
 
 #### Funcionários
-![Tabela Funcionários](imagens/tabela_alugueis.png)
+![Tabela Funcionários](https://github.com/Maarzano/C-digos-C---Curso/blob/adeec8205c6d1a32bbad0ee13f87469befbcee93/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Banco%20de%20dados%20e%20Modelos%20conceituais/Biblioteca_Table_Funcionariosl.png)
 
 #### Pendencias
-![Tabela Pendencias](imagens/tabela_alugueis.png)
+![Tabela Pendencias](https://github.com/Maarzano/C-digos-C---Curso/blob/adeec8205c6d1a32bbad0ee13f87469befbcee93/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Banco%20de%20dados%20e%20Modelos%20conceituais/Biblioteca_Table_Pendencias.png)
 
 ### Relações de Chaves Primárias e Estrangeiras:
 - **Pessoas (PK)** → **Compras (FK)**: A chave primária da tabela Pessoas (pessoa_id) é usada como chave estrangeira na tabela Compras através da restrição de chave estrangeira `FK_PessoaID`.
