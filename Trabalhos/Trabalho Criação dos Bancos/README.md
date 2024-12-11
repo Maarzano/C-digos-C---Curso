@@ -190,6 +190,32 @@ A contribuição de cada integrante foi essencial para a criação dos bancos de
 
 ---
 
+# Como Executar o Projeto
+
+## 1. Instalação do SQL Server
+- Certifique-se de que o SQL Server está instalado no seu computador. Caso não esteja, baixe e instale a versão mais recente do [Microsoft SQL Server](https://www.microsoft.com/sql-server/).
+
+## 2. Configuração do Ambiente
+- Abra o SQL Server Management Studio (SSMS) e conecte-se ao servidor local ou remoto.
+
+## 3. Criação do Banco de Dados
+- Para cada banco de dados (Música, Biblioteca, Rede Social, Handebol e Oficina Mecânica), execute os scripts de criação fornecidos. Eles incluem a definição das tabelas e as restrições de chaves primárias e estrangeiras.
+- Exemplo de script:
+  ```sql
+  CREATE DATABASE NomeDoBanco;
+  USE NomeDoBanco;
+
+  -- Exemplo de criação de tabela
+  CREATE TABLE NomeDaTabela (
+      ID INT PRIMARY KEY,
+      Nome VARCHAR(100) NOT NULL
+  );
+
+  -- Exemplo de inserção de dados
+  INSERT INTO NomeDaTabela (ID, Nome) VALUES (1, 'Exemplo');
+
+---
+
 ## Licença
 
 Este projeto está licenciado sob a Licença MIT - consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
