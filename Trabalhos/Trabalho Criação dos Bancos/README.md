@@ -143,18 +143,55 @@ O banco de dados da biblioteca foi projetado para gerenciar as informações sob
 
 #### Modelo Conceitual
 
-![Modelo Conceitual de Handebol](imagens/modelo_conceitual_handebol.png)
+![Modelo Conceitual de Handebol](https://github.com/Maarzano/C-digos-C---Curso/blob/129a088f6cab88116924de93e5fe154401f154a0/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Imagens/Diagramas/Diagrama_Handebol.png)
 
 #### Descrição do Modelo Conceitual:
-*Descrever o modelo conceitual e o relacionamento entre as tabelas.*
 
-### Tabelas
+* **Partidas:** Representa as partidas, com informações sobre os times envolvidos, data, horário, local, placar, etc.
+* **Cadastro de Estádio:** Contém dados sobre os estádios, como nome, localização, capacidade, etc.
+* **Cadastro de Usuário:** Armazena informações sobre os usuários do sistema, como nome, email, senha, etc.
+* **Cadastro de Time:** Guarda dados sobre os times, como nome, escudo, data de criação, etc.
+* **Classificação:** Registra a classificação dos times em um campeonato, com informações sobre posição, vitórias, etc.
+* **Cadastro de Elenco:** Armazena dados sobre os jogadores de cada time, como nome, data de nascimento, altura, etc.
+* **Campeonato:** Define os campeonatos, com informações sobre nome, ano, etc.
+  
+#### Relações:
+
+* **Partida - Time:** Uma partida é disputada entre dois times. (Muitos para Muitos)
+* **Partida - Estádio:** Uma partida ocorre em um estádio específico. (Um para Muitos)
+* **Time - Jogador:** Um time é composto por vários jogadores. (Um para Muitos)
+* **Campeonato - Time:** Um campeonato é disputado por vários times. (Um para Muitos)
+* **Campeonato - Partida:** Um campeonato é composto por várias partidas. (Um para Muitos)
+
+### Tabelas do Banco de Dados
 
 #### Tabela de Jogadores
-![Tabela de Jogadores do Handebol](imagens/tabela_jogadores_handebol.png)
+![Tabela de Jogadores do Handebol](https://github.com/Maarzano/C-digos-C---Curso/blob/129a088f6cab88116924de93e5fe154401f154a0/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Imagens/TabelasHandebol/Handebol_Jogadores.png)
 
-#### Tabela de Partidas
-![Tabela de Partidas do Handebol](imagens/tabela_partidas_handebol.png)
+#### Tabela de Estadio
+![Tabela de Partidas do Handebol](https://github.com/Maarzano/C-digos-C---Curso/blob/129a088f6cab88116924de93e5fe154401f154a0/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Imagens/TabelasHandebol/Handebol_Estadio.png)
+
+### Tabela de campeonato
+![Tabela do campeonatos](https://github.com/Maarzano/C-digos-C---Curso/blob/129a088f6cab88116924de93e5fe154401f154a0/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Imagens/TabelasHandebol/Handebol_Brasileirasso.png)
+
+### Tabela de ProximasPartidas
+![Tabela de proximas partidas](https://github.com/Maarzano/C-digos-C---Curso/blob/129a088f6cab88116924de93e5fe154401f154a0/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Imagens/TabelasHandebol/Handebol_ProximaPartida.png)
+
+### Tabela Classificação
+![Tabela de classificação](https://github.com/Maarzano/C-digos-C---Curso/blob/129a088f6cab88116924de93e5fe154401f154a0/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Imagens/TabelasHandebol/Handebol_Tabela.png)
+
+### Tabela de Times
+![Tabela de times](https://github.com/Maarzano/C-digos-C---Curso/blob/129a088f6cab88116924de93e5fe154401f154a0/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Imagens/TabelasHandebol/Handebol_Time.png)
+
+### Tabela de Usuários
+![Tabela de usuários](https://github.com/Maarzano/C-digos-C---Curso/blob/129a088f6cab88116924de93e5fe154401f154a0/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Imagens/TabelasHandebol/Handebol_Users.png)
+
+### Relações de Chaves Primárias e Estrangeiras:
+* Estadios(PK) → Partidas(FK): A chave primária da tabela Estadios (idEstadio) é usada como chave estrangeira na tabela Partidas através da restrição de chave estrangeira FK_Estadio.
+* Partidas(PK), Times(PK) → Partidas_Times(FK): As chaves primárias das tabelas Partidas (idPartida) e Times (idTime) são usadas como chaves estrangeiras na tabela Partidas_Times através das restrições de chave estrangeira FK_Partida e FK_Time.
+* Times(PK) → Jogadores(FK): A chave primária da tabela Times (idTime) é usada como chave estrangeira na tabela Jogadores através da restrição de chave estrangeira FK_Time.
+* Campeonatos(PK), Times(PK) → Campeonatos_Times(FK): As chaves primárias das tabelas Campeonatos (idCampeonato) e Times (idTime) são usadas como chaves estrangeira
+
 
 ---
 
