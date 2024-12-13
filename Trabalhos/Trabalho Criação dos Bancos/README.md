@@ -237,20 +237,898 @@ A contribuição de cada integrante foi essencial para a criação dos bancos de
 
 ## 3. Criação do Banco de Dados
 - Para cada banco de dados (Música, Biblioteca, Rede Social, Handebol e Oficina Mecânica), execute os scripts de criação fornecidos. Eles incluem a definição das tabelas e as restrições de chaves primárias e estrangeiras.
-- Exemplo de script:
-  ```sql
-  CREATE DATABASE NomeDoBanco;
-  USE NomeDoBanco;
-
-  -- Exemplo de criação de tabela
-  CREATE TABLE NomeDaTabela (
-      ID INT PRIMARY KEY,
-      Nome VARCHAR(100) NOT NULL
-  );
-
-  -- Exemplo de inserção de dados
-  INSERT INTO NomeDaTabela (ID, Nome) VALUES (1, 'Exemplo');
-
+### 1. Bancoo de Dados Músicas
+    ```sql
+    USE [master]
+    GO
+    /****** Object:  Database [DB_Musicas]    Script Date: 12/12/2024 18:36:29 ******/
+    CREATE DATABASE [DB_Musicas]
+     CONTAINMENT = NONE
+     ON  PRIMARY 
+    ( NAME = N'DB_Musicas', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\DATA\DB_Musicas.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+     LOG ON 
+    ( NAME = N'DB_Musicas_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\DATA\DB_Musicas_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+     WITH CATALOG_COLLATION = DATABASE_DEFAULT, LEDGER = OFF
+    GO
+    ALTER DATABASE [DB_Musicas] SET COMPATIBILITY_LEVEL = 150
+    GO
+    IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+    begin
+    EXEC [DB_Musicas].[dbo].[sp_fulltext_database] @action = 'enable'
+    end
+    GO
+    ALTER DATABASE [DB_Musicas] SET ANSI_NULL_DEFAULT OFF 
+    GO
+    ALTER DATABASE [DB_Musicas] SET ANSI_NULLS OFF 
+    GO
+    ALTER DATABASE [DB_Musicas] SET ANSI_PADDING OFF 
+    GO
+    ALTER DATABASE [DB_Musicas] SET ANSI_WARNINGS OFF 
+    GO
+    ALTER DATABASE [DB_Musicas] SET ARITHABORT OFF 
+    GO
+    ALTER DATABASE [DB_Musicas] SET AUTO_CLOSE OFF 
+    GO
+    ALTER DATABASE [DB_Musicas] SET AUTO_SHRINK OFF 
+    GO
+    ALTER DATABASE [DB_Musicas] SET AUTO_UPDATE_STATISTICS ON 
+    GO
+    ALTER DATABASE [DB_Musicas] SET CURSOR_CLOSE_ON_COMMIT OFF 
+    GO
+    ALTER DATABASE [DB_Musicas] SET CURSOR_DEFAULT  GLOBAL 
+    GO
+    ALTER DATABASE [DB_Musicas] SET CONCAT_NULL_YIELDS_NULL OFF 
+    GO
+    ALTER DATABASE [DB_Musicas] SET NUMERIC_ROUNDABORT OFF 
+    GO
+    ALTER DATABASE [DB_Musicas] SET QUOTED_IDENTIFIER OFF 
+    GO
+    ALTER DATABASE [DB_Musicas] SET RECURSIVE_TRIGGERS OFF 
+    GO
+    ALTER DATABASE [DB_Musicas] SET  DISABLE_BROKER 
+    GO
+    ALTER DATABASE [DB_Musicas] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+    GO
+    ALTER DATABASE [DB_Musicas] SET DATE_CORRELATION_OPTIMIZATION OFF 
+    GO
+    ALTER DATABASE [DB_Musicas] SET TRUSTWORTHY OFF 
+    GO
+    ALTER DATABASE [DB_Musicas] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+    GO
+    ALTER DATABASE [DB_Musicas] SET PARAMETERIZATION SIMPLE 
+    GO
+    ALTER DATABASE [DB_Musicas] SET READ_COMMITTED_SNAPSHOT OFF 
+    GO
+    ALTER DATABASE [DB_Musicas] SET HONOR_BROKER_PRIORITY OFF 
+    GO
+    ALTER DATABASE [DB_Musicas] SET RECOVERY SIMPLE 
+    GO
+    ALTER DATABASE [DB_Musicas] SET  MULTI_USER 
+    GO
+    ALTER DATABASE [DB_Musicas] SET PAGE_VERIFY CHECKSUM  
+    GO
+    ALTER DATABASE [DB_Musicas] SET DB_CHAINING OFF 
+    GO
+    ALTER DATABASE [DB_Musicas] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+    GO
+    ALTER DATABASE [DB_Musicas] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+    GO
+    ALTER DATABASE [DB_Musicas] SET DELAYED_DURABILITY = DISABLED 
+    GO
+    ALTER DATABASE [DB_Musicas] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+    GO
+    ALTER DATABASE [DB_Musicas] SET QUERY_STORE = OFF
+    GO
+    USE [DB_Musicas]
+    GO
+    /****** Object:  Table [dbo].[Albuns]    Script Date: 12/12/2024 18:36:29 ******/
+    SET ANSI_NULLS ON
+    GO
+    SET QUOTED_IDENTIFIER ON
+    GO
+    CREATE TABLE [dbo].[Albuns](
+    	[AlbumID] [int] IDENTITY(1,1) NOT NULL,
+    	[Nome] [nvarchar](100) NOT NULL,
+    	[ArtistaID] [int] NOT NULL,
+    	[AnoLancamento] [int] NULL,
+    PRIMARY KEY CLUSTERED 
+    (
+    	[AlbumID] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+    ) ON [PRIMARY]
+    GO
+    /****** Object:  Table [dbo].[Artistas]    Script Date: 12/12/2024 18:36:29 ******/
+    SET ANSI_NULLS ON
+    GO
+    SET QUOTED_IDENTIFIER ON
+    GO
+    CREATE TABLE [dbo].[Artistas](
+    	[ArtistaID] [int] IDENTITY(1,1) NOT NULL,
+    	[Nome] [nvarchar](100) NOT NULL,
+    	[Nacionalidade] [nvarchar](50) NULL,
+    	[CPF] [nvarchar](14) NOT NULL,
+    PRIMARY KEY CLUSTERED 
+    (
+    	[ArtistaID] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+    ) ON [PRIMARY]
+    GO
+    /****** Object:  Table [dbo].[Musicas]    Script Date: 12/12/2024 18:36:29 ******/
+    SET ANSI_NULLS ON
+    GO
+    SET QUOTED_IDENTIFIER ON
+    GO
+    CREATE TABLE [dbo].[Musicas](
+    	[MusicaID] [int] IDENTITY(1,1) NOT NULL,
+    	[Nome] [nvarchar](100) NOT NULL,
+    	[ArtistaID] [int] NOT NULL,
+    	[AlbumID] [int] NULL,
+    	[Duracao] [time](7) NOT NULL,
+    	[Genero] [nvarchar](50) NULL,
+    PRIMARY KEY CLUSTERED 
+    (
+    	[MusicaID] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+    ) ON [PRIMARY]
+    GO
+    /****** Object:  Table [dbo].[Usuarios]    Script Date: 12/12/2024 18:36:29 ******/
+    SET ANSI_NULLS ON
+    GO
+    SET QUOTED_IDENTIFIER ON
+    GO
+    CREATE TABLE [dbo].[Usuarios](
+    	[UsuarioID] [int] IDENTITY(1,1) NOT NULL,
+    	[PrimeiroNome] [nvarchar](100) NOT NULL,
+    	[SegundoNome] [nvarchar](100) NOT NULL,
+    	[CPF] [nvarchar](14) NOT NULL,
+    	[Nacionalidade] [nvarchar](100) NULL,
+    	[Email] [nvarchar](100) NOT NULL,
+    	[Senha] [nvarchar](255) NOT NULL,
+    	[DataCadastro] [date] NOT NULL,
+    PRIMARY KEY CLUSTERED 
+    (
+    	[UsuarioID] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+    ) ON [PRIMARY]
+    GO
+    SET IDENTITY_INSERT [dbo].[Albuns] ON 
+    
+    INSERT [dbo].[Albuns] ([AlbumID], [Nome], [ArtistaID], [AnoLancamento]) VALUES (1, N'Anitta', 1, 2015)
+    INSERT [dbo].[Albuns] ([AlbumID], [Nome], [ArtistaID], [AnoLancamento]) VALUES (2, N'Tropicalia', 2, 1968)
+    INSERT [dbo].[Albuns] ([AlbumID], [Nome], [ArtistaID], [AnoLancamento]) VALUES (3, N'Refavela', 3, 1977)
+    INSERT [dbo].[Albuns] ([AlbumID], [Nome], [ArtistaID], [AnoLancamento]) VALUES (4, N'Clima', 4, 2005)
+    INSERT [dbo].[Albuns] ([AlbumID], [Nome], [ArtistaID], [AnoLancamento]) VALUES (5, N'Ao Vivo em Goiânia', 5, 2019)
+    INSERT [dbo].[Albuns] ([AlbumID], [Nome], [ArtistaID], [AnoLancamento]) VALUES (6, N'Marília Mendonça - Ao Vivo', 6, 2020)
+    INSERT [dbo].[Albuns] ([AlbumID], [Nome], [ArtistaID], [AnoLancamento]) VALUES (7, N'Pabllo Vittar', 7, 2017)
+    INSERT [dbo].[Albuns] ([AlbumID], [Nome], [ArtistaID], [AnoLancamento]) VALUES (8, N'Milton Nascimento - Ao Vivo', 8, 2008)
+    INSERT [dbo].[Albuns] ([AlbumID], [Nome], [ArtistaID], [AnoLancamento]) VALUES (9, N'De Bem Com a Vida', 9, 2014)
+    INSERT [dbo].[Albuns] ([AlbumID], [Nome], [ArtistaID], [AnoLancamento]) VALUES (10, N'Fábio Jr. - Ao Vivo', 10, 2002)
+    INSERT [dbo].[Albuns] ([AlbumID], [Nome], [ArtistaID], [AnoLancamento]) VALUES (11, N'Chico Buarque - Ao Vivo', 11, 1999)
+    INSERT [dbo].[Albuns] ([AlbumID], [Nome], [ArtistaID], [AnoLancamento]) VALUES (12, N'Cem Mil', 12, 2018)
+    INSERT [dbo].[Albuns] ([AlbumID], [Nome], [ArtistaID], [AnoLancamento]) VALUES (13, N'Ao Vivo em São Paulo', 13, 2020)
+    INSERT [dbo].[Albuns] ([AlbumID], [Nome], [ArtistaID], [AnoLancamento]) VALUES (14, N'O Mundo é um Moinho', 14, 2019)
+    INSERT [dbo].[Albuns] ([AlbumID], [Nome], [ArtistaID], [AnoLancamento]) VALUES (15, N'Noite do Sertão', 15, 2018)
+    INSERT [dbo].[Albuns] ([AlbumID], [Nome], [ArtistaID], [AnoLancamento]) VALUES (16, N'Jorge e Mateus – Ao Vivo', 16, 2017)
+    INSERT [dbo].[Albuns] ([AlbumID], [Nome], [ArtistaID], [AnoLancamento]) VALUES (17, N'Chitãozinho & Xororó – Clássicos', 17, 2016)
+    INSERT [dbo].[Albuns] ([AlbumID], [Nome], [ArtistaID], [AnoLancamento]) VALUES (18, N'Maiara e Maraisa - Ao Vivo', 18, 2021)
+    INSERT [dbo].[Albuns] ([AlbumID], [Nome], [ArtistaID], [AnoLancamento]) VALUES (19, N'Simone e Simaria - Live', 19, 2020)
+    INSERT [dbo].[Albuns] ([AlbumID], [Nome], [ArtistaID], [AnoLancamento]) VALUES (20, N'Verde e Amarelo', 20, 2018)
+    INSERT [dbo].[Albuns] ([AlbumID], [Nome], [ArtistaID], [AnoLancamento]) VALUES (21, N'Rita Lee - Ao Vivo', 21, 2019)
+    INSERT [dbo].[Albuns] ([AlbumID], [Nome], [ArtistaID], [AnoLancamento]) VALUES (22, N'Roberto Carlos - 60 Anos', 22, 2021)
+    SET IDENTITY_INSERT [dbo].[Albuns] OFF
+    GO
+    SET IDENTITY_INSERT [dbo].[Artistas] ON 
+    
+    INSERT [dbo].[Artistas] ([ArtistaID], [Nome], [Nacionalidade], [CPF]) VALUES (1, N'Anitta', N'Brasileira', N'123.456.789-01')
+    INSERT [dbo].[Artistas] ([ArtistaID], [Nome], [Nacionalidade], [CPF]) VALUES (2, N'Caetano Veloso', N'Brasileiro', N'234.567.890-12')
+    INSERT [dbo].[Artistas] ([ArtistaID], [Nome], [Nacionalidade], [CPF]) VALUES (3, N'Gilberto Gil', N'Brasileiro', N'345.678.901-20')
+    INSERT [dbo].[Artistas] ([ArtistaID], [Nome], [Nacionalidade], [CPF]) VALUES (4, N'Ivete Sangalo', N'Brasileira', N'456.789.012-34')
+    INSERT [dbo].[Artistas] ([ArtistaID], [Nome], [Nacionalidade], [CPF]) VALUES (5, N'Luan Santana', N'Brasileiro', N'567.890.123-45')
+    INSERT [dbo].[Artistas] ([ArtistaID], [Nome], [Nacionalidade], [CPF]) VALUES (6, N'Marília Mendonça', N'Brasileira', N'678.901.234-56')
+    INSERT [dbo].[Artistas] ([ArtistaID], [Nome], [Nacionalidade], [CPF]) VALUES (7, N'Pablo Vittar', N'Brasileiro', N'789.012.345-67')
+    INSERT [dbo].[Artistas] ([ArtistaID], [Nome], [Nacionalidade], [CPF]) VALUES (8, N'Milton Nascimento', N'Brasileiro', N'890.123.456-78')
+    INSERT [dbo].[Artistas] ([ArtistaID], [Nome], [Nacionalidade], [CPF]) VALUES (9, N'Roberta Campos', N'Brasileira', N'901.234.567-89')
+    INSERT [dbo].[Artistas] ([ArtistaID], [Nome], [Nacionalidade], [CPF]) VALUES (10, N'Fábio Jr.', N'Brasileiro', N'012.345.678-90')
+    INSERT [dbo].[Artistas] ([ArtistaID], [Nome], [Nacionalidade], [CPF]) VALUES (11, N'Chico Buarque', N'Brasileiro', N'345.678.901-23')
+    INSERT [dbo].[Artistas] ([ArtistaID], [Nome], [Nacionalidade], [CPF]) VALUES (12, N'Gusttavo Lima', N'Brasileiro', N'234.567.890-34')
+    INSERT [dbo].[Artistas] ([ArtistaID], [Nome], [Nacionalidade], [CPF]) VALUES (13, N'Marcos e Belutti', N'Brasileiros', N'345.678.901-45')
+    INSERT [dbo].[Artistas] ([ArtistaID], [Nome], [Nacionalidade], [CPF]) VALUES (14, N'Luan Santana', N'Brasileiro', N'456.789.012-56')
+    INSERT [dbo].[Artistas] ([ArtistaID], [Nome], [Nacionalidade], [CPF]) VALUES (15, N'Zezé Di Camargo & Luciano', N'Brasileiros', N'567.890.123-67')
+    INSERT [dbo].[Artistas] ([ArtistaID], [Nome], [Nacionalidade], [CPF]) VALUES (16, N'Jorge e Mateus', N'Brasileiros', N'678.901.234-78')
+    INSERT [dbo].[Artistas] ([ArtistaID], [Nome], [Nacionalidade], [CPF]) VALUES (17, N'Chitãozinho & Xororó', N'Brasileiros', N'789.012.345-89')
+    INSERT [dbo].[Artistas] ([ArtistaID], [Nome], [Nacionalidade], [CPF]) VALUES (18, N'Maiara e Maraisa', N'Brasileiras', N'890.123.456-90')
+    INSERT [dbo].[Artistas] ([ArtistaID], [Nome], [Nacionalidade], [CPF]) VALUES (19, N'Simone e Simaria', N'Brasileiras', N'901.234.567-01')
+    INSERT [dbo].[Artistas] ([ArtistaID], [Nome], [Nacionalidade], [CPF]) VALUES (20, N'Vanessa da Mata', N'Brasileira', N'012.345.678-11')
+    INSERT [dbo].[Artistas] ([ArtistaID], [Nome], [Nacionalidade], [CPF]) VALUES (21, N'Rita Lee', N'Brasileira', N'123.456.789-22')
+    INSERT [dbo].[Artistas] ([ArtistaID], [Nome], [Nacionalidade], [CPF]) VALUES (22, N'Roberto Carlos', N'Brasileiro', N'234.567.890-33')
+    SET IDENTITY_INSERT [dbo].[Artistas] OFF
+    GO
+    SET IDENTITY_INSERT [dbo].[Musicas] ON 
+    
+    INSERT [dbo].[Musicas] ([MusicaID], [Nome], [ArtistaID], [AlbumID], [Duracao], [Genero]) VALUES (1, N'Show das Poderosas', 1, 1, CAST(N'00:03:30' AS Time), N'Pop')
+    INSERT [dbo].[Musicas] ([MusicaID], [Nome], [ArtistaID], [AlbumID], [Duracao], [Genero]) VALUES (2, N'O Canto de Dona Sinhá', 2, 2, CAST(N'00:05:00' AS Time), N'MPB')
+    INSERT [dbo].[Musicas] ([MusicaID], [Nome], [ArtistaID], [AlbumID], [Duracao], [Genero]) VALUES (3, N'Aquele Abraço', 3, 3, CAST(N'00:04:00' AS Time), N'MPB')
+    INSERT [dbo].[Musicas] ([MusicaID], [Nome], [ArtistaID], [AlbumID], [Duracao], [Genero]) VALUES (4, N'Sorte Grande', 4, 4, CAST(N'00:04:20' AS Time), N'Axé')
+    INSERT [dbo].[Musicas] ([MusicaID], [Nome], [ArtistaID], [AlbumID], [Duracao], [Genero]) VALUES (5, N'Esquema Preferido', 5, 5, CAST(N'00:03:15' AS Time), N'Sertanejo')
+    INSERT [dbo].[Musicas] ([MusicaID], [Nome], [ArtistaID], [AlbumID], [Duracao], [Genero]) VALUES (6, N'Infiel', 6, 6, CAST(N'00:04:45' AS Time), N'Sertanejo')
+    INSERT [dbo].[Musicas] ([MusicaID], [Nome], [ArtistaID], [AlbumID], [Duracao], [Genero]) VALUES (7, N'K.O.', 7, 7, CAST(N'00:03:40' AS Time), N'Pop')
+    INSERT [dbo].[Musicas] ([MusicaID], [Nome], [ArtistaID], [AlbumID], [Duracao], [Genero]) VALUES (8, N'Maria Maria', 8, 8, CAST(N'00:04:10' AS Time), N'MPB')
+    INSERT [dbo].[Musicas] ([MusicaID], [Nome], [ArtistaID], [AlbumID], [Duracao], [Genero]) VALUES (9, N'De Bem Com a Vida', 9, 9, CAST(N'00:04:30' AS Time), N'Sertanejo')
+    INSERT [dbo].[Musicas] ([MusicaID], [Nome], [ArtistaID], [AlbumID], [Duracao], [Genero]) VALUES (10, N'Alma Gêmea', 10, 10, CAST(N'00:03:25' AS Time), N'Romântico')
+    INSERT [dbo].[Musicas] ([MusicaID], [Nome], [ArtistaID], [AlbumID], [Duracao], [Genero]) VALUES (11, N'Construção', 11, 11, CAST(N'00:05:10' AS Time), N'MPB')
+    INSERT [dbo].[Musicas] ([MusicaID], [Nome], [ArtistaID], [AlbumID], [Duracao], [Genero]) VALUES (12, N'Amor de Verdade', 12, 12, CAST(N'00:03:10' AS Time), N'Pop')
+    INSERT [dbo].[Musicas] ([MusicaID], [Nome], [ArtistaID], [AlbumID], [Duracao], [Genero]) VALUES (13, N'Música Boa', 13, 13, CAST(N'00:04:00' AS Time), N'Pop')
+    INSERT [dbo].[Musicas] ([MusicaID], [Nome], [ArtistaID], [AlbumID], [Duracao], [Genero]) VALUES (14, N'A Vida é Boa', 14, 14, CAST(N'00:04:30' AS Time), N'MPB')
+    INSERT [dbo].[Musicas] ([MusicaID], [Nome], [ArtistaID], [AlbumID], [Duracao], [Genero]) VALUES (15, N'Chorando Se Foi', 15, 15, CAST(N'00:05:20' AS Time), N'Sertanejo')
+    INSERT [dbo].[Musicas] ([MusicaID], [Nome], [ArtistaID], [AlbumID], [Duracao], [Genero]) VALUES (16, N'Faz Parte', 16, 16, CAST(N'00:03:50' AS Time), N'Sertanejo')
+    INSERT [dbo].[Musicas] ([MusicaID], [Nome], [ArtistaID], [AlbumID], [Duracao], [Genero]) VALUES (17, N'Briga Feia', 17, 17, CAST(N'00:03:30' AS Time), N'Sertanejo')
+    INSERT [dbo].[Musicas] ([MusicaID], [Nome], [ArtistaID], [AlbumID], [Duracao], [Genero]) VALUES (18, N'Morrendo de Saudade', 18, 18, CAST(N'00:04:15' AS Time), N'Sertanejo')
+    INSERT [dbo].[Musicas] ([MusicaID], [Nome], [ArtistaID], [AlbumID], [Duracao], [Genero]) VALUES (19, N'Querendo Te Ver', 19, 19, CAST(N'00:03:55' AS Time), N'Pop')
+    INSERT [dbo].[Musicas] ([MusicaID], [Nome], [ArtistaID], [AlbumID], [Duracao], [Genero]) VALUES (20, N'Ritmo Perfeito', 20, 20, CAST(N'00:03:40' AS Time), N'Axé')
+    INSERT [dbo].[Musicas] ([MusicaID], [Nome], [ArtistaID], [AlbumID], [Duracao], [Genero]) VALUES (21, N'Deixa a Vida Me Levar', 21, 21, CAST(N'00:04:00' AS Time), N'MPB')
+    INSERT [dbo].[Musicas] ([MusicaID], [Nome], [ArtistaID], [AlbumID], [Duracao], [Genero]) VALUES (22, N'Detalhes', 22, 22, CAST(N'00:04:25' AS Time), N'Romântico')
+    INSERT [dbo].[Musicas] ([MusicaID], [Nome], [ArtistaID], [AlbumID], [Duracao], [Genero]) VALUES (23, N'paratodo(Ao Vivo)', 11, 11, CAST(N'00:03:15' AS Time), NULL)
+    SET IDENTITY_INSERT [dbo].[Musicas] OFF
+    GO
+    SET IDENTITY_INSERT [dbo].[Usuarios] ON 
+    
+    INSERT [dbo].[Usuarios] ([UsuarioID], [PrimeiroNome], [SegundoNome], [CPF], [Nacionalidade], [Email], [Senha], [DataCadastro]) VALUES (1, N'Carlos', N'Silva', N'123.456.789-00', N'Brasileiro', N'carlos.silva@email.com', N'senha123', CAST(N'2023-01-10' AS Date))
+    INSERT [dbo].[Usuarios] ([UsuarioID], [PrimeiroNome], [SegundoNome], [CPF], [Nacionalidade], [Email], [Senha], [DataCadastro]) VALUES (2, N'Maria', N'Oliveira', N'987.654.321-00', N'Brasileira', N'maria.oliveira@email.com', N'senha456', CAST(N'2023-02-15' AS Date))
+    INSERT [dbo].[Usuarios] ([UsuarioID], [PrimeiroNome], [SegundoNome], [CPF], [Nacionalidade], [Email], [Senha], [DataCadastro]) VALUES (3, N'João', N'Pereira', N'111.222.333-44', N'Brasileiro', N'joao.pereira@email.com', N'senha789', CAST(N'2023-03-20' AS Date))
+    INSERT [dbo].[Usuarios] ([UsuarioID], [PrimeiroNome], [SegundoNome], [CPF], [Nacionalidade], [Email], [Senha], [DataCadastro]) VALUES (4, N'Ana', N'Costa', N'444.555.666-77', N'Brasileira', N'ana.costa@email.com', N'senha321', CAST(N'2023-04-01' AS Date))
+    INSERT [dbo].[Usuarios] ([UsuarioID], [PrimeiroNome], [SegundoNome], [CPF], [Nacionalidade], [Email], [Senha], [DataCadastro]) VALUES (5, N'Ricardo', N'Souza', N'555.666.777-88', N'Brasileiro', N'ricardo.souza@email.com', N'senha654', CAST(N'2023-05-10' AS Date))
+    INSERT [dbo].[Usuarios] ([UsuarioID], [PrimeiroNome], [SegundoNome], [CPF], [Nacionalidade], [Email], [Senha], [DataCadastro]) VALUES (6, N'Fernanda', N'Santos', N'666.777.888-99', N'Brasileira', N'fernanda.santos@email.com', N'senha987', CAST(N'2023-06-25' AS Date))
+    INSERT [dbo].[Usuarios] ([UsuarioID], [PrimeiroNome], [SegundoNome], [CPF], [Nacionalidade], [Email], [Senha], [DataCadastro]) VALUES (7, N'Juliana', N'Martins', N'777.888.999-00', N'Brasileira', N'juliana.martins@email.com', N'senha159', CAST(N'2023-07-30' AS Date))
+    INSERT [dbo].[Usuarios] ([UsuarioID], [PrimeiroNome], [SegundoNome], [CPF], [Nacionalidade], [Email], [Senha], [DataCadastro]) VALUES (8, N'Paulo', N'Lima', N'888.999.000-11', N'Brasileiro', N'paulo.lima@email.com', N'senha753', CAST(N'2023-08-18' AS Date))
+    INSERT [dbo].[Usuarios] ([UsuarioID], [PrimeiroNome], [SegundoNome], [CPF], [Nacionalidade], [Email], [Senha], [DataCadastro]) VALUES (9, N'Luana', N'Nascimento', N'999.000.111-22', N'Brasileira', N'luana.nascimento@email.com', N'senha852', CAST(N'2023-09-05' AS Date))
+    INSERT [dbo].[Usuarios] ([UsuarioID], [PrimeiroNome], [SegundoNome], [CPF], [Nacionalidade], [Email], [Senha], [DataCadastro]) VALUES (10, N'Carlos', N'Mendes', N'000.111.222-33', N'Brasileiro', N'carlos.mendes@email.com', N'senha963', CAST(N'2023-10-12' AS Date))
+    INSERT [dbo].[Usuarios] ([UsuarioID], [PrimeiroNome], [SegundoNome], [CPF], [Nacionalidade], [Email], [Senha], [DataCadastro]) VALUES (11, N'Claudia', N'Ferreira', N'222.333.444-55', N'Brasileira', N'claudia.ferreira@email.com', N'senha321', CAST(N'2023-12-01' AS Date))
+    INSERT [dbo].[Usuarios] ([UsuarioID], [PrimeiroNome], [SegundoNome], [CPF], [Nacionalidade], [Email], [Senha], [DataCadastro]) VALUES (12, N'Rafael', N'Almeida', N'333.444.555-66', N'Brasileiro', N'rafael.almeida@email.com', N'senha111', CAST(N'2023-11-01' AS Date))
+    INSERT [dbo].[Usuarios] ([UsuarioID], [PrimeiroNome], [SegundoNome], [CPF], [Nacionalidade], [Email], [Senha], [DataCadastro]) VALUES (13, N'Beatriz', N'Silveira', N'444.555.666-11', N'Brasileira', N'beatriz.silveira@email.com', N'senha222', CAST(N'2023-11-05' AS Date))
+    INSERT [dbo].[Usuarios] ([UsuarioID], [PrimeiroNome], [SegundoNome], [CPF], [Nacionalidade], [Email], [Senha], [DataCadastro]) VALUES (14, N'Lucas', N'Gomes', N'555.666.777-22', N'Brasileiro', N'lucas.gomes@email.com', N'senha333', CAST(N'2023-11-10' AS Date))
+    INSERT [dbo].[Usuarios] ([UsuarioID], [PrimeiroNome], [SegundoNome], [CPF], [Nacionalidade], [Email], [Senha], [DataCadastro]) VALUES (15, N'Juliano', N'Rodrigues', N'666.777.888-33', N'Brasileiro', N'juliano.rodrigues@email.com', N'senha444', CAST(N'2023-11-15' AS Date))
+    INSERT [dbo].[Usuarios] ([UsuarioID], [PrimeiroNome], [SegundoNome], [CPF], [Nacionalidade], [Email], [Senha], [DataCadastro]) VALUES (16, N'Vanessa', N'Martins', N'777.888.999-44', N'Brasileira', N'vanessa.martins@email.com', N'senha555', CAST(N'2023-11-20' AS Date))
+    INSERT [dbo].[Usuarios] ([UsuarioID], [PrimeiroNome], [SegundoNome], [CPF], [Nacionalidade], [Email], [Senha], [DataCadastro]) VALUES (17, N'Eduardo', N'Nascimento', N'888.999.000-55', N'Brasileiro', N'eduardo.nascimento@email.com', N'senha666', CAST(N'2023-11-25' AS Date))
+    INSERT [dbo].[Usuarios] ([UsuarioID], [PrimeiroNome], [SegundoNome], [CPF], [Nacionalidade], [Email], [Senha], [DataCadastro]) VALUES (18, N'Marcos', N'Souza', N'999.000.111-66', N'Brasileiro', N'marcos.souza@email.com', N'senha777', CAST(N'2023-12-05' AS Date))
+    INSERT [dbo].[Usuarios] ([UsuarioID], [PrimeiroNome], [SegundoNome], [CPF], [Nacionalidade], [Email], [Senha], [DataCadastro]) VALUES (19, N'Carla', N'Pereira', N'000.111.222-44', N'Brasileira', N'carla.pereira@email.com', N'senha888', CAST(N'2023-12-10' AS Date))
+    INSERT [dbo].[Usuarios] ([UsuarioID], [PrimeiroNome], [SegundoNome], [CPF], [Nacionalidade], [Email], [Senha], [DataCadastro]) VALUES (20, N'André', N'Costa', N'111.222.333-11', N'Brasileiro', N'andre.costa@email.com', N'senha999', CAST(N'2023-12-15' AS Date))
+    INSERT [dbo].[Usuarios] ([UsuarioID], [PrimeiroNome], [SegundoNome], [CPF], [Nacionalidade], [Email], [Senha], [DataCadastro]) VALUES (21, N'Tatiane', N'Oliveira', N'222.333.444-66', N'Brasileira', N'tatiane.oliveira@email.com', N'senha000', CAST(N'2023-12-20' AS Date))
+    INSERT [dbo].[Usuarios] ([UsuarioID], [PrimeiroNome], [SegundoNome], [CPF], [Nacionalidade], [Email], [Senha], [DataCadastro]) VALUES (22, N'Felipe', N'Lima', N'333.444.555-77', N'Brasileiro', N'felipe.lima@email.com', N'senha1234', CAST(N'2023-12-25' AS Date))
+    SET IDENTITY_INSERT [dbo].[Usuarios] OFF
+    GO
+    SET ANSI_PADDING ON
+    GO
+    /****** Object:  Index [UQ__Artistas__C1F89731CC1B64BD]    Script Date: 12/12/2024 18:36:29 ******/
+    ALTER TABLE [dbo].[Artistas] ADD UNIQUE NONCLUSTERED 
+    (
+    	[CPF] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+    GO
+    SET ANSI_PADDING ON
+    GO
+    /****** Object:  Index [UQ__Usuarios__A9D105340812CC58]    Script Date: 12/12/2024 18:36:29 ******/
+    ALTER TABLE [dbo].[Usuarios] ADD UNIQUE NONCLUSTERED 
+    (
+    	[Email] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+    GO
+    SET ANSI_PADDING ON
+    GO
+    /****** Object:  Index [UQ__Usuarios__C1F89731F5303FDD]    Script Date: 12/12/2024 18:36:29 ******/
+    ALTER TABLE [dbo].[Usuarios] ADD UNIQUE NONCLUSTERED 
+    (
+    	[CPF] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+    GO
+    ALTER TABLE [dbo].[Usuarios] ADD  DEFAULT (getdate()) FOR [DataCadastro]
+    GO
+    ALTER TABLE [dbo].[Albuns]  WITH CHECK ADD  CONSTRAINT [FK_ArtistaID] FOREIGN KEY([ArtistaID])
+    REFERENCES [dbo].[Artistas] ([ArtistaID])
+    GO
+    ALTER TABLE [dbo].[Albuns] CHECK CONSTRAINT [FK_ArtistaID]
+    GO
+    ALTER TABLE [dbo].[Musicas]  WITH CHECK ADD  CONSTRAINT [FK_AlbumID] FOREIGN KEY([AlbumID])
+    REFERENCES [dbo].[Albuns] ([AlbumID])
+    GO
+    ALTER TABLE [dbo].[Musicas] CHECK CONSTRAINT [FK_AlbumID]
+    GO
+    ALTER TABLE [dbo].[Musicas]  WITH CHECK ADD  CONSTRAINT [FK_Musicas_ArtistaID] FOREIGN KEY([ArtistaID])
+    REFERENCES [dbo].[Artistas] ([ArtistaID])
+    GO
+    ALTER TABLE [dbo].[Musicas] CHECK CONSTRAINT [FK_Musicas_ArtistaID]
+    GO
+    USE [master]
+    GO
+    ALTER DATABASE [DB_Musicas] SET  READ_WRITE 
+    GO
+---
+## 2. Banco de Dados Biblioteca
+    ```sql
+    USE [master]
+    GO
+    /****** Object:  Database [DB_BibliotecaOruam]    Script Date: 12/12/2024 18:35:51 ******/
+    CREATE DATABASE [DB_BibliotecaOruam]
+     CONTAINMENT = NONE
+     ON  PRIMARY 
+    ( NAME = N'DB_BibliotecaOruam', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\DATA\DB_BibliotecaOruam.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+     LOG ON 
+    ( NAME = N'DB_BibliotecaOruam_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\DATA\DB_BibliotecaOruam_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+     WITH CATALOG_COLLATION = DATABASE_DEFAULT, LEDGER = OFF
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET COMPATIBILITY_LEVEL = 150
+    GO
+    IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+    begin
+    EXEC [DB_BibliotecaOruam].[dbo].[sp_fulltext_database] @action = 'enable'
+    end
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET ANSI_NULL_DEFAULT OFF 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET ANSI_NULLS OFF 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET ANSI_PADDING OFF 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET ANSI_WARNINGS OFF 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET ARITHABORT OFF 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET AUTO_CLOSE OFF 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET AUTO_SHRINK OFF 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET AUTO_UPDATE_STATISTICS ON 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET CURSOR_CLOSE_ON_COMMIT OFF 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET CURSOR_DEFAULT  GLOBAL 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET CONCAT_NULL_YIELDS_NULL OFF 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET NUMERIC_ROUNDABORT OFF 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET QUOTED_IDENTIFIER OFF 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET RECURSIVE_TRIGGERS OFF 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET  DISABLE_BROKER 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET DATE_CORRELATION_OPTIMIZATION OFF 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET TRUSTWORTHY OFF 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET PARAMETERIZATION SIMPLE 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET READ_COMMITTED_SNAPSHOT OFF 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET HONOR_BROKER_PRIORITY OFF 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET RECOVERY SIMPLE 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET  MULTI_USER 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET PAGE_VERIFY CHECKSUM  
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET DB_CHAINING OFF 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET DELAYED_DURABILITY = DISABLED 
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET QUERY_STORE = OFF
+    GO
+    USE [DB_BibliotecaOruam]
+    GO
+    /****** Object:  Table [dbo].[Alugueis]    Script Date: 12/12/2024 18:35:51 ******/
+    SET ANSI_NULLS ON
+    GO
+    SET QUOTED_IDENTIFIER ON
+    GO
+    CREATE TABLE [dbo].[Alugueis](
+    	[aluguel_id] [int] IDENTITY(1,1) NOT NULL,
+    	[pessoa_id] [int] NULL,
+    	[computador_id] [int] NULL,
+    	[data_aluguel] [date] NULL,
+    	[data_devolucao] [date] NULL,
+    	[preco] [decimal](10, 2) NULL,
+    PRIMARY KEY CLUSTERED 
+    (
+    	[aluguel_id] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+    ) ON [PRIMARY]
+    GO
+    /****** Object:  Table [dbo].[Compras]    Script Date: 12/12/2024 18:35:51 ******/
+    SET ANSI_NULLS ON
+    GO
+    SET QUOTED_IDENTIFIER ON
+    GO
+    CREATE TABLE [dbo].[Compras](
+    	[compra_id] [int] IDENTITY(1,1) NOT NULL,
+    	[pessoa_id] [int] NULL,
+    	[livro_id] [int] NULL,
+    	[data_compra] [date] NULL,
+    	[quantidade] [int] NULL,
+    PRIMARY KEY CLUSTERED 
+    (
+    	[compra_id] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+    ) ON [PRIMARY]
+    GO
+    /****** Object:  Table [dbo].[Computadores]    Script Date: 12/12/2024 18:35:51 ******/
+    SET ANSI_NULLS ON
+    GO
+    SET QUOTED_IDENTIFIER ON
+    GO
+    CREATE TABLE [dbo].[Computadores](
+    	[computador_id] [int] IDENTITY(1,1) NOT NULL,
+    	[numero_serie] [varchar](50) NULL,
+    	[status] [varchar](20) NULL,
+    PRIMARY KEY CLUSTERED 
+    (
+    	[computador_id] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+    ) ON [PRIMARY]
+    GO
+    /****** Object:  Table [dbo].[Funcionarios]    Script Date: 12/12/2024 18:35:51 ******/
+    SET ANSI_NULLS ON
+    GO
+    SET QUOTED_IDENTIFIER ON
+    GO
+    CREATE TABLE [dbo].[Funcionarios](
+    	[funcionario_id] [int] IDENTITY(1,1) NOT NULL,
+    	[pessoa_id] [int] NULL,
+    	[cargo] [varchar](50) NULL,
+    PRIMARY KEY CLUSTERED 
+    (
+    	[funcionario_id] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+    ) ON [PRIMARY]
+    GO
+    /****** Object:  Table [dbo].[Livros]    Script Date: 12/12/2024 18:35:51 ******/
+    SET ANSI_NULLS ON
+    GO
+    SET QUOTED_IDENTIFIER ON
+    GO
+    CREATE TABLE [dbo].[Livros](
+    	[livro_id] [int] IDENTITY(1,1) NOT NULL,
+    	[titulo] [varchar](255) NULL,
+    	[autor] [varchar](100) NULL,
+    	[editora] [varchar](100) NULL,
+    	[ano_publicacao] [int] NULL,
+    	[status] [varchar](20) NULL,
+    PRIMARY KEY CLUSTERED 
+    (
+    	[livro_id] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+    ) ON [PRIMARY]
+    GO
+    /****** Object:  Table [dbo].[Pendencias]    Script Date: 12/12/2024 18:35:51 ******/
+    SET ANSI_NULLS ON
+    GO
+    SET QUOTED_IDENTIFIER ON
+    GO
+    CREATE TABLE [dbo].[Pendencias](
+    	[pendencia_id] [int] IDENTITY(1,1) NOT NULL,
+    	[pessoa_id] [int] NULL,
+    	[descricao] [varchar](255) NULL,
+    	[status] [varchar](20) NULL,
+    	[data_pendencia] [date] NULL,
+    PRIMARY KEY CLUSTERED 
+    (
+    	[pendencia_id] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+    ) ON [PRIMARY]
+    GO
+    /****** Object:  Table [dbo].[Pessoas]    Script Date: 12/12/2024 18:35:52 ******/
+    SET ANSI_NULLS ON
+    GO
+    SET QUOTED_IDENTIFIER ON
+    GO
+    CREATE TABLE [dbo].[Pessoas](
+    	[pessoa_id] [int] IDENTITY(1,1) NOT NULL,
+    	[nome] [varchar](100) NULL,
+    	[cpf] [varchar](14) NULL,
+    	[tipo] [varchar](20) NULL,
+    	[email] [varchar](100) NULL,
+    	[telefone] [varchar](15) NULL,
+    	[endereço] [varchar](255) NULL,
+    	[data_nascimento] [date] NULL,
+    PRIMARY KEY CLUSTERED 
+    (
+    	[pessoa_id] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+    ) ON [PRIMARY]
+    GO
+    SET IDENTITY_INSERT [dbo].[Alugueis] ON 
+    
+    INSERT [dbo].[Alugueis] ([aluguel_id], [pessoa_id], [computador_id], [data_aluguel], [data_devolucao], [preco]) VALUES (1, 1, 1, CAST(N'2023-05-10' AS Date), CAST(N'2023-05-12' AS Date), CAST(10.00 AS Decimal(10, 2)))
+    INSERT [dbo].[Alugueis] ([aluguel_id], [pessoa_id], [computador_id], [data_aluguel], [data_devolucao], [preco]) VALUES (2, 2, 2, CAST(N'2023-06-01' AS Date), CAST(N'2023-06-03' AS Date), CAST(15.00 AS Decimal(10, 2)))
+    INSERT [dbo].[Alugueis] ([aluguel_id], [pessoa_id], [computador_id], [data_aluguel], [data_devolucao], [preco]) VALUES (3, 3, 4, CAST(N'2023-07-01' AS Date), CAST(N'2023-07-05' AS Date), CAST(12.00 AS Decimal(10, 2)))
+    INSERT [dbo].[Alugueis] ([aluguel_id], [pessoa_id], [computador_id], [data_aluguel], [data_devolucao], [preco]) VALUES (4, 4, 3, CAST(N'2023-08-01' AS Date), CAST(N'2023-08-10' AS Date), CAST(20.00 AS Decimal(10, 2)))
+    INSERT [dbo].[Alugueis] ([aluguel_id], [pessoa_id], [computador_id], [data_aluguel], [data_devolucao], [preco]) VALUES (6, 35, 1, CAST(N'2023-06-15' AS Date), CAST(N'2023-06-17' AS Date), CAST(10.00 AS Decimal(10, 2)))
+    INSERT [dbo].[Alugueis] ([aluguel_id], [pessoa_id], [computador_id], [data_aluguel], [data_devolucao], [preco]) VALUES (7, 36, 2, CAST(N'2023-07-10' AS Date), CAST(N'2023-07-12' AS Date), CAST(15.00 AS Decimal(10, 2)))
+    INSERT [dbo].[Alugueis] ([aluguel_id], [pessoa_id], [computador_id], [data_aluguel], [data_devolucao], [preco]) VALUES (8, 37, 3, CAST(N'2023-08-01' AS Date), CAST(N'2023-08-05' AS Date), CAST(12.00 AS Decimal(10, 2)))
+    INSERT [dbo].[Alugueis] ([aluguel_id], [pessoa_id], [computador_id], [data_aluguel], [data_devolucao], [preco]) VALUES (9, 38, 4, CAST(N'2023-09-05' AS Date), CAST(N'2023-09-10' AS Date), CAST(20.00 AS Decimal(10, 2)))
+    INSERT [dbo].[Alugueis] ([aluguel_id], [pessoa_id], [computador_id], [data_aluguel], [data_devolucao], [preco]) VALUES (10, 39, 5, CAST(N'2023-10-10' AS Date), CAST(N'2023-10-12' AS Date), CAST(10.00 AS Decimal(10, 2)))
+    INSERT [dbo].[Alugueis] ([aluguel_id], [pessoa_id], [computador_id], [data_aluguel], [data_devolucao], [preco]) VALUES (11, 40, 6, CAST(N'2023-10-15' AS Date), CAST(N'2023-10-20' AS Date), CAST(25.00 AS Decimal(10, 2)))
+    INSERT [dbo].[Alugueis] ([aluguel_id], [pessoa_id], [computador_id], [data_aluguel], [data_devolucao], [preco]) VALUES (12, 41, 7, CAST(N'2023-11-01' AS Date), CAST(N'2023-11-03' AS Date), CAST(15.00 AS Decimal(10, 2)))
+    INSERT [dbo].[Alugueis] ([aluguel_id], [pessoa_id], [computador_id], [data_aluguel], [data_devolucao], [preco]) VALUES (13, 42, 8, CAST(N'2023-11-05' AS Date), CAST(N'2023-11-10' AS Date), CAST(12.00 AS Decimal(10, 2)))
+    INSERT [dbo].[Alugueis] ([aluguel_id], [pessoa_id], [computador_id], [data_aluguel], [data_devolucao], [preco]) VALUES (14, 43, 9, CAST(N'2023-11-10' AS Date), CAST(N'2023-11-12' AS Date), CAST(18.00 AS Decimal(10, 2)))
+    INSERT [dbo].[Alugueis] ([aluguel_id], [pessoa_id], [computador_id], [data_aluguel], [data_devolucao], [preco]) VALUES (15, 44, 10, CAST(N'2023-11-20' AS Date), CAST(N'2023-11-22' AS Date), CAST(20.00 AS Decimal(10, 2)))
+    SET IDENTITY_INSERT [dbo].[Alugueis] OFF
+    GO
+    SET IDENTITY_INSERT [dbo].[Compras] ON 
+    
+    INSERT [dbo].[Compras] ([compra_id], [pessoa_id], [livro_id], [data_compra], [quantidade]) VALUES (1, 1, 1, CAST(N'2023-05-10' AS Date), 1)
+    INSERT [dbo].[Compras] ([compra_id], [pessoa_id], [livro_id], [data_compra], [quantidade]) VALUES (2, 2, 2, CAST(N'2023-05-15' AS Date), 1)
+    INSERT [dbo].[Compras] ([compra_id], [pessoa_id], [livro_id], [data_compra], [quantidade]) VALUES (3, 3, 3, CAST(N'2023-06-20' AS Date), 2)
+    INSERT [dbo].[Compras] ([compra_id], [pessoa_id], [livro_id], [data_compra], [quantidade]) VALUES (4, 4, 4, CAST(N'2023-07-25' AS Date), 1)
+    INSERT [dbo].[Compras] ([compra_id], [pessoa_id], [livro_id], [data_compra], [quantidade]) VALUES (6, 35, 1, CAST(N'2023-05-12' AS Date), 1)
+    INSERT [dbo].[Compras] ([compra_id], [pessoa_id], [livro_id], [data_compra], [quantidade]) VALUES (7, 36, 2, CAST(N'2023-05-15' AS Date), 1)
+    INSERT [dbo].[Compras] ([compra_id], [pessoa_id], [livro_id], [data_compra], [quantidade]) VALUES (8, 37, 3, CAST(N'2023-06-01' AS Date), 2)
+    INSERT [dbo].[Compras] ([compra_id], [pessoa_id], [livro_id], [data_compra], [quantidade]) VALUES (9, 38, 4, CAST(N'2023-07-12' AS Date), 1)
+    INSERT [dbo].[Compras] ([compra_id], [pessoa_id], [livro_id], [data_compra], [quantidade]) VALUES (10, 39, 5, CAST(N'2023-07-15' AS Date), 1)
+    INSERT [dbo].[Compras] ([compra_id], [pessoa_id], [livro_id], [data_compra], [quantidade]) VALUES (11, 40, 6, CAST(N'2023-08-20' AS Date), 1)
+    INSERT [dbo].[Compras] ([compra_id], [pessoa_id], [livro_id], [data_compra], [quantidade]) VALUES (12, 41, 7, CAST(N'2023-09-01' AS Date), 2)
+    INSERT [dbo].[Compras] ([compra_id], [pessoa_id], [livro_id], [data_compra], [quantidade]) VALUES (13, 42, 8, CAST(N'2023-09-15' AS Date), 1)
+    INSERT [dbo].[Compras] ([compra_id], [pessoa_id], [livro_id], [data_compra], [quantidade]) VALUES (14, 43, 9, CAST(N'2023-10-10' AS Date), 1)
+    INSERT [dbo].[Compras] ([compra_id], [pessoa_id], [livro_id], [data_compra], [quantidade]) VALUES (15, 44, 10, CAST(N'2023-10-15' AS Date), 1)
+    SET IDENTITY_INSERT [dbo].[Compras] OFF
+    GO
+    SET IDENTITY_INSERT [dbo].[Computadores] ON 
+    
+    INSERT [dbo].[Computadores] ([computador_id], [numero_serie], [status]) VALUES (1, N'ABC12345', N'Disponível')
+    INSERT [dbo].[Computadores] ([computador_id], [numero_serie], [status]) VALUES (2, N'DEF67890', N'Em uso')
+    INSERT [dbo].[Computadores] ([computador_id], [numero_serie], [status]) VALUES (3, N'GHI11223', N'Em manutenção')
+    INSERT [dbo].[Computadores] ([computador_id], [numero_serie], [status]) VALUES (4, N'JKL33445', N'Disponível')
+    INSERT [dbo].[Computadores] ([computador_id], [numero_serie], [status]) VALUES (5, N'MNO11223', N'Disponível')
+    INSERT [dbo].[Computadores] ([computador_id], [numero_serie], [status]) VALUES (6, N'PQR22334', N'Em uso')
+    INSERT [dbo].[Computadores] ([computador_id], [numero_serie], [status]) VALUES (7, N'STU33445', N'Em manutenção')
+    INSERT [dbo].[Computadores] ([computador_id], [numero_serie], [status]) VALUES (8, N'VWX44556', N'Disponível')
+    INSERT [dbo].[Computadores] ([computador_id], [numero_serie], [status]) VALUES (9, N'YZR55667', N'Em uso')
+    INSERT [dbo].[Computadores] ([computador_id], [numero_serie], [status]) VALUES (10, N'ABC66778', N'Disponível')
+    INSERT [dbo].[Computadores] ([computador_id], [numero_serie], [status]) VALUES (11, N'DEF77889', N'Em manutenção')
+    INSERT [dbo].[Computadores] ([computador_id], [numero_serie], [status]) VALUES (12, N'GHI88990', N'Disponível')
+    INSERT [dbo].[Computadores] ([computador_id], [numero_serie], [status]) VALUES (13, N'JKL99001', N'Em uso')
+    INSERT [dbo].[Computadores] ([computador_id], [numero_serie], [status]) VALUES (14, N'MNO11234', N'Disponível')
+    SET IDENTITY_INSERT [dbo].[Computadores] OFF
+    GO
+    SET IDENTITY_INSERT [dbo].[Funcionarios] ON 
+    
+    INSERT [dbo].[Funcionarios] ([funcionario_id], [pessoa_id], [cargo]) VALUES (1, 2, N'Bibliotecário')
+    INSERT [dbo].[Funcionarios] ([funcionario_id], [pessoa_id], [cargo]) VALUES (2, 4, N'Assistente Administrativo')
+    INSERT [dbo].[Funcionarios] ([funcionario_id], [pessoa_id], [cargo]) VALUES (3, 35, N'Assistente Administrativo')
+    INSERT [dbo].[Funcionarios] ([funcionario_id], [pessoa_id], [cargo]) VALUES (4, 36, N'Bibliotecário')
+    INSERT [dbo].[Funcionarios] ([funcionario_id], [pessoa_id], [cargo]) VALUES (5, 37, N'Assistente de TI')
+    INSERT [dbo].[Funcionarios] ([funcionario_id], [pessoa_id], [cargo]) VALUES (6, 38, N'Supervisor de Bibliotecas')
+    INSERT [dbo].[Funcionarios] ([funcionario_id], [pessoa_id], [cargo]) VALUES (7, 39, N'Coordenador de Cursos')
+    INSERT [dbo].[Funcionarios] ([funcionario_id], [pessoa_id], [cargo]) VALUES (8, 40, N'Assistente de Marketing')
+    INSERT [dbo].[Funcionarios] ([funcionario_id], [pessoa_id], [cargo]) VALUES (9, 41, N'Supervisor de TI')
+    INSERT [dbo].[Funcionarios] ([funcionario_id], [pessoa_id], [cargo]) VALUES (10, 42, N'Analista de Sistemas')
+    INSERT [dbo].[Funcionarios] ([funcionario_id], [pessoa_id], [cargo]) VALUES (11, 43, N'Coordenador de TI')
+    INSERT [dbo].[Funcionarios] ([funcionario_id], [pessoa_id], [cargo]) VALUES (12, 44, N'Analista de Marketing')
+    SET IDENTITY_INSERT [dbo].[Funcionarios] OFF
+    GO
+    SET IDENTITY_INSERT [dbo].[Livros] ON 
+    
+    INSERT [dbo].[Livros] ([livro_id], [titulo], [autor], [editora], [ano_publicacao], [status]) VALUES (1, N'O Alquimista', N'Paulo Coelho', N'HarperCollins', 1988, N'Disponível')
+    INSERT [dbo].[Livros] ([livro_id], [titulo], [autor], [editora], [ano_publicacao], [status]) VALUES (2, N'1984', N'George Orwell', N'Companhia das Letras', 1949, N'Emprestado')
+    INSERT [dbo].[Livros] ([livro_id], [titulo], [autor], [editora], [ano_publicacao], [status]) VALUES (3, N'Dom Casmurro', N'Machado de Assis', N'Editora Abril', 1899, N'Disponível')
+    INSERT [dbo].[Livros] ([livro_id], [titulo], [autor], [editora], [ano_publicacao], [status]) VALUES (4, N'O Senhor dos Anéis', N'J.R.R. Tolkien', N'HarperCollins', 1954, N'Disponível')
+    INSERT [dbo].[Livros] ([livro_id], [titulo], [autor], [editora], [ano_publicacao], [status]) VALUES (5, N'A Arte da Guerra', N'Sun Tzu', N'Editora ABC', 500, N'Disponível')
+    INSERT [dbo].[Livros] ([livro_id], [titulo], [autor], [editora], [ano_publicacao], [status]) VALUES (6, N'O Príncipe', N'Nicolau Maquiavel', N'Editora XYZ', 1532, N'Emprestado')
+    INSERT [dbo].[Livros] ([livro_id], [titulo], [autor], [editora], [ano_publicacao], [status]) VALUES (7, N'O Gene Egoísta', N'Richard Dawkins', N'Editora DEF', 1976, N'Disponível')
+    INSERT [dbo].[Livros] ([livro_id], [titulo], [autor], [editora], [ano_publicacao], [status]) VALUES (8, N'Sapiens: Uma Breve História da Humanidade', N'Yuval Noah Harari', N'Editora GHI', 2011, N'Disponível')
+    INSERT [dbo].[Livros] ([livro_id], [titulo], [autor], [editora], [ano_publicacao], [status]) VALUES (9, N'O Pequeno Príncipe', N'Antoine de Saint-Exupéry', N'Editora JKL', 1943, N'Emprestado')
+    INSERT [dbo].[Livros] ([livro_id], [titulo], [autor], [editora], [ano_publicacao], [status]) VALUES (10, N'A Revolução dos Bichos', N'George Orwell', N'Editora MNO', 1945, N'Disponível')
+    INSERT [dbo].[Livros] ([livro_id], [titulo], [autor], [editora], [ano_publicacao], [status]) VALUES (11, N'Os Miseráveis', N'Victor Hugo', N'Editora PQR', 1862, N'Disponível')
+    INSERT [dbo].[Livros] ([livro_id], [titulo], [autor], [editora], [ano_publicacao], [status]) VALUES (12, N'Fahrenheit 451', N'Ray Bradbury', N'Editora STU', 1953, N'Disponível')
+    INSERT [dbo].[Livros] ([livro_id], [titulo], [autor], [editora], [ano_publicacao], [status]) VALUES (13, N'O Hobbit', N'J.R.R. Tolkien', N'Editora VWX', 1937, N'Disponível')
+    INSERT [dbo].[Livros] ([livro_id], [titulo], [autor], [editora], [ano_publicacao], [status]) VALUES (14, N'A Caverna', N'José Saramago', N'Editora YZR', 2001, N'Emprestado')
+    SET IDENTITY_INSERT [dbo].[Livros] OFF
+    GO
+    SET IDENTITY_INSERT [dbo].[Pendencias] ON 
+    
+    INSERT [dbo].[Pendencias] ([pendencia_id], [pessoa_id], [descricao], [status], [data_pendencia]) VALUES (1, 1, N'Devolução do livro "1984" pendente', N'Em aberto', CAST(N'2023-05-20' AS Date))
+    INSERT [dbo].[Pendencias] ([pendencia_id], [pessoa_id], [descricao], [status], [data_pendencia]) VALUES (2, 2, N'Multa por atraso na devolução do livro "Dom Casmurro"', N'Resolvido', CAST(N'2023-06-01' AS Date))
+    INSERT [dbo].[Pendencias] ([pendencia_id], [pessoa_id], [descricao], [status], [data_pendencia]) VALUES (3, 3, N'Livro "O Senhor dos Anéis" danificado', N'Em aberto', CAST(N'2023-07-15' AS Date))
+    INSERT [dbo].[Pendencias] ([pendencia_id], [pessoa_id], [descricao], [status], [data_pendencia]) VALUES (4, 4, N'Atraso no pagamento do aluguel do computador', N'Em aberto', CAST(N'2023-08-05' AS Date))
+    INSERT [dbo].[Pendencias] ([pendencia_id], [pessoa_id], [descricao], [status], [data_pendencia]) VALUES (6, 35, N'Pagamento pendente de aluguel de computador', N'Pendente', CAST(N'2023-06-18' AS Date))
+    INSERT [dbo].[Pendencias] ([pendencia_id], [pessoa_id], [descricao], [status], [data_pendencia]) VALUES (7, 36, N'Livro "O Príncipe" não devolvido', N'Pendente', CAST(N'2023-07-20' AS Date))
+    INSERT [dbo].[Pendencias] ([pendencia_id], [pessoa_id], [descricao], [status], [data_pendencia]) VALUES (8, 37, N'Multa por atraso na devolução do livro', N'Pendente', CAST(N'2023-08-07' AS Date))
+    INSERT [dbo].[Pendencias] ([pendencia_id], [pessoa_id], [descricao], [status], [data_pendencia]) VALUES (9, 38, N'Falta de documentação necessária para cadastro', N'Pendente', CAST(N'2023-09-12' AS Date))
+    INSERT [dbo].[Pendencias] ([pendencia_id], [pessoa_id], [descricao], [status], [data_pendencia]) VALUES (10, 39, N'Problema de pagamento de mensalidade', N'Pendente', CAST(N'2023-10-13' AS Date))
+    INSERT [dbo].[Pendencias] ([pendencia_id], [pessoa_id], [descricao], [status], [data_pendencia]) VALUES (11, 40, N'Equipamento de TI não devolvido após o prazo', N'Pendente', CAST(N'2023-10-22' AS Date))
+    INSERT [dbo].[Pendencias] ([pendencia_id], [pessoa_id], [descricao], [status], [data_pendencia]) VALUES (12, 41, N'Multa por danificação de livro', N'Pendente', CAST(N'2023-11-03' AS Date))
+    INSERT [dbo].[Pendencias] ([pendencia_id], [pessoa_id], [descricao], [status], [data_pendencia]) VALUES (13, 42, N'Pagamento pendente de aluguel de computador', N'Pendente', CAST(N'2023-11-05' AS Date))
+    INSERT [dbo].[Pendencias] ([pendencia_id], [pessoa_id], [descricao], [status], [data_pendencia]) VALUES (14, 43, N'Livro "Sapiens" perdido', N'Pendente', CAST(N'2023-11-14' AS Date))
+    INSERT [dbo].[Pendencias] ([pendencia_id], [pessoa_id], [descricao], [status], [data_pendencia]) VALUES (15, 44, N'Atraso no retorno do equipamento de TI', N'Pendente', CAST(N'2023-11-23' AS Date))
+    SET IDENTITY_INSERT [dbo].[Pendencias] OFF
+    GO
+    SET IDENTITY_INSERT [dbo].[Pessoas] ON 
+    
+    INSERT [dbo].[Pessoas] ([pessoa_id], [nome], [cpf], [tipo], [email], [telefone], [endereço], [data_nascimento]) VALUES (1, N'Maria Silva', N'123.456.789-01', N'Aluno', N'maria.silva@email.com', N'21987654321', N'Rua A, 123', CAST(N'1995-08-20' AS Date))
+    INSERT [dbo].[Pessoas] ([pessoa_id], [nome], [cpf], [tipo], [email], [telefone], [endereço], [data_nascimento]) VALUES (2, N'João Santos', N'987.654.321-00', N'Funcionário', N'joao.santos@email.com', N'21987654322', N'Avenida B, 456', CAST(N'1982-03-15' AS Date))
+    INSERT [dbo].[Pessoas] ([pessoa_id], [nome], [cpf], [tipo], [email], [telefone], [endereço], [data_nascimento]) VALUES (3, N'Carlos Oliveira', N'111.222.333-44', N'Aluno', N'carlos.oliveira@email.com', N'21987654323', N'Rua C, 789', CAST(N'1993-10-10' AS Date))
+    INSERT [dbo].[Pessoas] ([pessoa_id], [nome], [cpf], [tipo], [email], [telefone], [endereço], [data_nascimento]) VALUES (4, N'Ana Costa', N'444.555.666-77', N'Funcionario', N'ana.costa@email.com', N'21987654324', N'Praça D, 101', CAST(N'1985-06-05' AS Date))
+    INSERT [dbo].[Pessoas] ([pessoa_id], [nome], [cpf], [tipo], [email], [telefone], [endereço], [data_nascimento]) VALUES (35, N'Luiza Martins', N'222.333.344-55', N'Aluno', N'luiza.martins@email.com', N'21987654325', N'Rua E, 321', CAST(N'2000-02-14' AS Date))
+    INSERT [dbo].[Pessoas] ([pessoa_id], [nome], [cpf], [tipo], [email], [telefone], [endereço], [data_nascimento]) VALUES (36, N'Eduardo Lima', N'333.444.235-66', N'Funcionario', N'eduardo.lima@email.com', N'21987654326', N'Avenida F, 654', CAST(N'1988-12-01' AS Date))
+    INSERT [dbo].[Pessoas] ([pessoa_id], [nome], [cpf], [tipo], [email], [telefone], [endereço], [data_nascimento]) VALUES (37, N'Beatriz Almeida', N'555.006.777-88', N'Aluno', N'beatriz.almeida@email.com', N'21987654327', N'Rua G, 987', CAST(N'1997-05-30' AS Date))
+    INSERT [dbo].[Pessoas] ([pessoa_id], [nome], [cpf], [tipo], [email], [telefone], [endereço], [data_nascimento]) VALUES (38, N'Ricardo Souza', N'777.848.999-00', N'Aluno', N'ricardo.souza@email.com', N'21987654328', N'Rua H, 654', CAST(N'1995-04-15' AS Date))
+    INSERT [dbo].[Pessoas] ([pessoa_id], [nome], [cpf], [tipo], [email], [telefone], [endereço], [data_nascimento]) VALUES (39, N'Fernanda Rocha', N'888.999.000-11', N'Funcionario', N'fernanda.rocha@email.com', N'21987654329', N'Praça I, 321', CAST(N'1980-07-22' AS Date))
+    INSERT [dbo].[Pessoas] ([pessoa_id], [nome], [cpf], [tipo], [email], [telefone], [endereço], [data_nascimento]) VALUES (40, N'Gabriel Pereira', N'111.222.763-44', N'Aluno', N'gabriel.pereira@email.com', N'21987654330', N'Rua J, 543', CAST(N'1999-09-10' AS Date))
+    INSERT [dbo].[Pessoas] ([pessoa_id], [nome], [cpf], [tipo], [email], [telefone], [endereço], [data_nascimento]) VALUES (41, N'Larissa Costa', N'999.111.222-33', N'Funcionario', N'larissa.costa@email.com', N'21987654331', N'Avenida K, 876', CAST(N'1983-02-20' AS Date))
+    INSERT [dbo].[Pessoas] ([pessoa_id], [nome], [cpf], [tipo], [email], [telefone], [endereço], [data_nascimento]) VALUES (42, N'André Oliveira', N'333.434.555-66', N'Aluno', N'andre.oliveira@email.com', N'21987654332', N'Rua L, 321', CAST(N'1996-11-25' AS Date))
+    INSERT [dbo].[Pessoas] ([pessoa_id], [nome], [cpf], [tipo], [email], [telefone], [endereço], [data_nascimento]) VALUES (43, N'Carolina Rocha', N'666.707.888-99', N'Aluno', N'carolina.rocha@email.com', N'21987654333', N'Avenida M, 987', CAST(N'2002-08-12' AS Date))
+    INSERT [dbo].[Pessoas] ([pessoa_id], [nome], [cpf], [tipo], [email], [telefone], [endereço], [data_nascimento]) VALUES (44, N'Bruna Almeida', N'404.555.666-77', N'Funcionario', N'bruna.almeida@email.com', N'21987654334', N'Praça N, 654', CAST(N'1987-03-30' AS Date))
+    INSERT [dbo].[Pessoas] ([pessoa_id], [nome], [cpf], [tipo], [email], [telefone], [endereço], [data_nascimento]) VALUES (45, N'Pedro Costa', N'555.606.777-88', N'Aluno', N'pedro.costa@email.com', N'21987654335', N'Rua O, 123', CAST(N'1994-12-05' AS Date))
+    INSERT [dbo].[Pessoas] ([pessoa_id], [nome], [cpf], [tipo], [email], [telefone], [endereço], [data_nascimento]) VALUES (46, N'Marcelo Martins', N'202.333.444-55', N'Funcionario', N'marcelo.martins@email.com', N'21987654336', N'Avenida P, 456', CAST(N'1981-06-18' AS Date))
+    INSERT [dbo].[Pessoas] ([pessoa_id], [nome], [cpf], [tipo], [email], [telefone], [endereço], [data_nascimento]) VALUES (47, N'Ricardo Almeida', N'333.904.555-66', N'Aluno', N'ricardo.almeida@email.com', N'21987654337', N'Rua Q, 789', CAST(N'1998-01-10' AS Date))
+    INSERT [dbo].[Pessoas] ([pessoa_id], [nome], [cpf], [tipo], [email], [telefone], [endereço], [data_nascimento]) VALUES (48, N'Simone Oliveira', N'111.666.333-44', N'Funcionario', N'simone.oliveira@email.com', N'21987654338', N'Rua R, 543', CAST(N'1984-05-25' AS Date))
+    INSERT [dbo].[Pessoas] ([pessoa_id], [nome], [cpf], [tipo], [email], [telefone], [endereço], [data_nascimento]) VALUES (49, N'Victor Costa', N'999.111.202-33', N'Aluno', N'victor.costa@email.com', N'21987654339', N'Rua S, 123', CAST(N'2001-09-18' AS Date))
+    INSERT [dbo].[Pessoas] ([pessoa_id], [nome], [cpf], [tipo], [email], [telefone], [endereço], [data_nascimento]) VALUES (50, N'Juliana Rocha', N'838.999.000-11', N'Funcionario', N'juliana.rocha@email.com', N'21987654340', N'Praça T, 321', CAST(N'1985-10-10' AS Date))
+    INSERT [dbo].[Pessoas] ([pessoa_id], [nome], [cpf], [tipo], [email], [telefone], [endereço], [data_nascimento]) VALUES (51, N'Thiago Santos', N'777.858.999-00', N'Aluno', N'thiago.santos@email.com', N'21987654341', N'Rua U, 987', CAST(N'1997-07-22' AS Date))
+    INSERT [dbo].[Pessoas] ([pessoa_id], [nome], [cpf], [tipo], [email], [telefone], [endereço], [data_nascimento]) VALUES (52, N'Mariana Almeida', N'565.666.777-88', N'Funcionario', N'mariana.almeida@email.com', N'21987654342', N'Avenida V, 876', CAST(N'1982-02-14' AS Date))
+    INSERT [dbo].[Pessoas] ([pessoa_id], [nome], [cpf], [tipo], [email], [telefone], [endereço], [data_nascimento]) VALUES (53, N'Rodrigo Lima', N'272.333.444-55', N'Aluno', N'rodrigo.lima@email.com', N'21987654343', N'Rua W, 654', CAST(N'1993-12-05' AS Date))
+    INSERT [dbo].[Pessoas] ([pessoa_id], [nome], [cpf], [tipo], [email], [telefone], [endereço], [data_nascimento]) VALUES (54, N'Laura Pereira', N'044.555.666-77', N'Funcionario', N'laura.pereira@email.com', N'21987654344', N'Rua X, 123', CAST(N'1986-11-15' AS Date))
+    SET IDENTITY_INSERT [dbo].[Pessoas] OFF
+    GO
+    SET ANSI_PADDING ON
+    GO
+    /****** Object:  Index [UQ__Computad__D8D7353C57708EF0]    Script Date: 12/12/2024 18:35:52 ******/
+    ALTER TABLE [dbo].[Computadores] ADD UNIQUE NONCLUSTERED 
+    (
+    	[numero_serie] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+    GO
+    SET ANSI_PADDING ON
+    GO
+    /****** Object:  Index [UQ__Pessoas__AB6E616441116975]    Script Date: 12/12/2024 18:35:52 ******/
+    ALTER TABLE [dbo].[Pessoas] ADD UNIQUE NONCLUSTERED 
+    (
+    	[email] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+    GO
+    SET ANSI_PADDING ON
+    GO
+    /****** Object:  Index [UQ__Pessoas__D836E71F04109FDD]    Script Date: 12/12/2024 18:35:52 ******/
+    ALTER TABLE [dbo].[Pessoas] ADD UNIQUE NONCLUSTERED 
+    (
+    	[cpf] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+    GO
+    ALTER TABLE [dbo].[Alugueis]  WITH CHECK ADD FOREIGN KEY([computador_id])
+    REFERENCES [dbo].[Computadores] ([computador_id])
+    GO
+    ALTER TABLE [dbo].[Alugueis]  WITH CHECK ADD FOREIGN KEY([pessoa_id])
+    REFERENCES [dbo].[Pessoas] ([pessoa_id])
+    GO
+    ALTER TABLE [dbo].[Compras]  WITH CHECK ADD FOREIGN KEY([livro_id])
+    REFERENCES [dbo].[Livros] ([livro_id])
+    GO
+    ALTER TABLE [dbo].[Compras]  WITH CHECK ADD FOREIGN KEY([pessoa_id])
+    REFERENCES [dbo].[Pessoas] ([pessoa_id])
+    GO
+    ALTER TABLE [dbo].[Funcionarios]  WITH CHECK ADD FOREIGN KEY([pessoa_id])
+    REFERENCES [dbo].[Pessoas] ([pessoa_id])
+    GO
+    ALTER TABLE [dbo].[Pendencias]  WITH CHECK ADD FOREIGN KEY([pessoa_id])
+    REFERENCES [dbo].[Pessoas] ([pessoa_id])
+    GO
+    USE [master]
+    GO
+    ALTER DATABASE [DB_BibliotecaOruam] SET  READ_WRITE 
+    GO
+---
+## 3. Banco de Dados Handebol
+    ```sql
+    GO
+    
+    CREATE DATABASE CampHandebol;
+    
+    GO
+    
+    USE CampHandebol;
+    
+    GO
+    
+    /*Criação da Tabela de Cadastro do Time*/
+    CREATE TABLE CadastroTime (
+        IDTime INT IDENTITY (1,1) PRIMARY KEY,
+        NomeTime VARCHAR(100),
+        EscudoTime VARCHAR(255),
+        DataCriacao DATE,
+        CapitaoDoTime VARCHAR(100)
+    );
+    
+    GO
+    
+    INSERT INTO CadastroTime (NomeTime, EscudoTime, DataCriacao, CapitaoDoTime)
+    VALUES
+    ('Tigres da Vila', 'escudos/tigres_vila.png', '2020-01-01', 'João Silva'),
+    ('Águias do Norte', 'escudos/aguias_norte.png', '2021-02-15', 'Carlos Souza'),
+    ('Leões da Serra', 'escudos/leoes_serra.png', '2019-03-10', 'Maria Oliveira'),
+    ('Falcões do Sul', 'escudos/falcoes_sul.png', '2018-04-20', 'Ana Santos'),
+    ('Panteras de Ouro', 'escudos/panteras_ouro.png', '2022-05-30', 'Pedro Lima'),
+    ('Lobos do Oeste', 'escudos/lobos_oeste.png', '2020-06-25', 'Lucas Costa'),
+    ('Raposas do Vale', 'escudos/raposas_vale.png', '2017-07-15', 'Beatriz Rocha'),
+    ('Gaviões do Cerrado', 'escudos/gavioes_cerrado.png', '2021-08-05', 'Fernanda Dias'),
+    ('Onças do Litoral', 'escudos/oncas_litoral.png', '2023-09-10', 'André Almeida'),
+    ('Tubarões da Praia', 'escudos/tubaroes_praia.png', '2016-10-01', 'Juliana Martins');
+    
+    GO
+    
+    /*Criação da Tabela de Cadastro do Elenco*/
+    CREATE TABLE CadastroElenco (
+        IDJogador INT IDENTITY (1,1) PRIMARY KEY,
+        NomeJogador VARCHAR(100),
+        DataNascimentoJogador DATE,
+        AlturaJogador INT,
+        GeneroJogador VARCHAR (20),
+    IDTime int not null,
+    CONSTRAINT FK_CadastroElenco_CadastroTime FOREIGN KEY (IDTime) REFERENCES CadastroTime(IDTime)
+    );
+    
+    GO
+    
+    INSERT INTO CadastroElenco (IDTime, NomeJogador, DataNascimentoJogador, AlturaJogador, GeneroJogador)
+    VALUES
+    (1,'João Silva', '1990-01-01', 185, 'Masculino'),
+    (1,'Carlos Souza', '1992-02-02', 190, 'Masculino'),
+    (4,'Maria Oliveira', '1995-03-03', 175, 'Feminino'),
+    (6,'Ana Santos', '1991-04-04', 168, 'Feminino'),
+    (7,'Pedro Lima', '1998-05-05', 182, 'Masculino'),
+    (2,'Lucas Costa', '2000-06-06', 188, 'Masculino'),
+    (8,'Beatriz Rocha', '1997-07-07', 172, 'Feminino'),
+    (3,'Fernanda Dias', '1996-08-08', 180, 'Feminino'),
+    (5,'André Almeida', '1993-09-09', 183, 'Masculino'),
+    (9,'Juliana Martins', '1989-10-10', 170, 'Feminino');
+    
+    GO
+    
+    /*Criação da Tabela de Cadastro de Estádio*/
+    CREATE TABLE CadastroEstadio (
+        IDEstadio INT IDENTITY (1,1) PRIMARY KEY ,
+        NomeEstadio VARCHAR(100),
+        Lugar VARCHAR(150),
+        CapacidadeEstadio INT,
+        DonoEstadio VARCHAR(100)
+    );
+    
+    GO
+    
+    INSERT INTO CadastroEstadio (NomeEstadio, Lugar, CapacidadeEstadio, DonoEstadio) VALUES
+    ('Arena Tigre', 'São Paulo', 20000, 'Tigres da Vila'),
+    ('Estádio Águia Azul', 'Manaus', 25000, 'Águias do Norte'),
+    ('Arena dos Leões', 'Belo Horizonte', 30000, 'Leões da Serra'),
+    ('Estádio Falcão Branco', 'Porto Alegre', 15000, 'Falcões do Sul'),
+    ('Arena Pantera Negra', 'Rio de Janeiro', 18000, 'Panteras de Ouro'),
+    ('Estádio Lobo Cinzento', 'Curitiba', 22000, 'Lobos do Oeste'),
+    ('Arena Raposa Dourada', 'Goiânia', 27000, 'Raposas do Vale'),
+    ('Estádio Gavião Real', 'Brasília', 19000, 'Gaviões do Cerrado'),
+    ('Arena Onça Pintada', 'Fortaleza', 24000, 'Onças do Litoral'),
+    ('Estádio Tubarão Branco', 'Salvador', 26000, 'Tubarões da Praia');
+    
+    GO
+    
+    /*Criação da Tabela de Cadastro do Usuário*/
+    CREATE TABLE CadastroUsuario (
+        IDUsuario INT IDENTITY (1,1)  PRIMARY KEY,
+        EmailUser VARCHAR(150),
+        SenhaUser VARCHAR(255),
+        NomeUser VARCHAR(100),
+        DataNascimentoUser DATE,
+        CPFUser CHAR(11),
+        NumeroCelularUser VARCHAR(15)
+    );
+    
+    GO
+    
+    INSERT INTO CadastroUsuario (EmailUser, SenhaUser, NomeUser, DataNascimentoUser, CPFUser, NumeroCelularUser)
+    VALUES
+    ('paula.martins@example.com', 'senhaabc123', 'Paula Martins', '1982-04-11', '12398745601', '11922334455'),
+    ('guilherme.silva@example.com', 'guilherme321', 'Guilherme Silva', '1993-07-30', '98765432100', '11933445566'),
+    ('clarice.souza@example.com', 'clarice456', 'Clarice Souza', '1991-01-23', '14725836902', '11944556677'),
+    ('thiago.oliveira@example.com', 'tiago789', 'Thiago Oliveira', '1988-06-14', '25836914703', '11955667788'),
+    ('isabela.pereira@example.com', 'isabela1000', 'Isabela Pereira', '1995-09-02', '36974125804', '11966778899'),
+    ('renan.gomes@example.com', 'renan1234', 'Renan Gomes', '1994-10-05', '74185296305', '11977889900'),
+    ('camila.ferreira@example.com', 'camila999', 'Camila Ferreira', '1997-12-17', '85296374106', '11988990011'),
+    ('lucas.rodrigues@example.com', 'lucas5678', 'Lucas Rodrigues', '2000-05-22', '96385274107', '11999001122'),
+    ('patricia.silva@example.com', 'patricia4321', 'Patrícia Silva', '1992-08-13', '15975346808', '11910111213'),
+    ('andreia.martins@example.com', 'andreia2020', 'Andreia Martins', '1985-03-04', '75315968409', '11921222324');
+    
+    GO
+    
+    /*Criação da Tabela Campeonato*/
+    CREATE TABLE Campeonato (
+        IDCampeonato INT IDENTITY (1,1) PRIMARY KEY,
+        NomeCampeonato VARCHAR(100),
+        AnoCampeonato DATE
+    );
+    
+    GO
+    
+    INSERT INTO Campeonato (NomeCampeonato, AnoCampeonato)
+    VALUES ('BRASILEIRASSO', '2025-02-10');
+    
+    GO
+    
+    /*Criação da Tabela de Classificação do Campeonato*/
+    CREATE TABLE Classificacao (
+        IDClassificacao INT IDENTITY (1,1) PRIMARY KEY,
+        IDCampeonato INT,
+        IDTime INT,
+        Posicao INT,
+        Vitorias INT,
+        SaldoGols INT,
+    Pontuacao INT,
+        FOREIGN KEY (IDCampeonato) REFERENCES Campeonato(IDCampeonato),
+        FOREIGN KEY (IDTime) REFERENCES CadastroTime(IDTime)
+    );
+    
+    GO
+    
+    INSERT INTO Classificacao (IDCampeonato, IDTime, Posicao, Vitorias, SaldoGols, Pontuacao)
+    VALUES
+    (1, 1, 1, 20, 35, 60),
+    (1, 2, 2, 18, 28, 54),
+    (1, 3, 3, 15, 22, 48),
+    (1, 4, 4, 13, 18, 43),
+    (1, 5, 5, 10, 10, 35),
+    (1, 6, 1, 22, 40, 66),
+    (1, 7, 2, 19, 30, 57),
+    (1, 8, 3, 17, 25, 52),
+    (1, 9, 4, 14, 20, 44),
+    (1, 10, 5, 12, 15, 39);
+    
+    GO
+    
+    /*Criação de Tabela das Próximas Partidas do Campeonato*/
+    CREATE TABLE ProximasPartidas (
+        IDPartida INT IDENTITY(1,1) PRIMARY KEY,
+        TimeMandante INT NOT NULL,
+        TimeVisitante INT NOT NULL,
+        Placar VARCHAR(10),
+    Dia date,
+        Horario TIME,
+    IDEstadio INT not null,
+    CONSTRAINT FK_ProximasPartidas_CadastroEstadio FOREIGN KEY (IDEstadio) REFERENCES CadastroEstadio(IDEstadio),
+    FOREIGN KEY (TimeMandante) REFERENCES CadastroTime(IDTime),
+    FOREIGN KEY (TimeVisitante) REFERENCES CadastroTime(IDTime)
+    );
+    
+    GO
+    
+    INSERT INTO ProximasPartidas (TimeMandante, TimeVisitante, Placar, Dia, Horario, IDEstadio)
+    VALUES
+    (1, 2, NULL, '2024-12-15', '16:00:00', 1),
+    (3, 4, NULL, '2024-12-16', '18:30:00', 2),  
+    (5, 6, NULL, '2024-12-17', '20:00:00', 3),  
+    (7, 8, NULL, '2024-12-18', '19:00:00', 4),  
+    (9, 10, NULL, '2024-12-19', '21:00:00', 5),
+    (2, 3, NULL, '2024-12-20', '15:00:00', 6),
+    (4, 5, NULL, '2024-12-21', '17:30:00', 7),
+    (6, 7, NULL, '2024-12-22', '19:30:00', 8),  
+    (8, 9, NULL, '2024-12-23', '16:00:00', 9),
+    (10, 1, NULL, '2024-12-24', '18:00:00', 10);
+    
+    
+---
+## 4. Banco de Dados Rede Social
+    ```sql
+    
+    
+---
+## 5. Banco de Dados Mecânica
+    ```sql
+    
 ---
 
 ## Licença
