@@ -121,21 +121,101 @@ O banco de dados da biblioteca foi projetado para gerenciar as informações sob
 
 #### Modelo Conceitual
 
-![Modelo Conceitual da Rede Social](imagens/modelo_conceitual_rede_social.png)
+![Modelo Conceitual da Rede Social](https://github.com/Maarzano/C-digos-C---Curso/blob/55432cdfe49f1791eed187700b568d7c64f8bc7d/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Imagens/Diagramas/DiagramRedeSocial.png)
 
 #### Descrição do Modelo Conceitual:
-*Descrever o modelo conceitual e o relacionamento entre as tabelas.*
 
-### Tabelas
+O banco de dados foi projetado para gerenciar informações de uma rede social fictícia, permitindo interação entre os usuários por meio de postagens, comentários, curtidas, mensagens e relações de amizade. As principais entidades do modelo são:
+
+
+- **Usuário (Usuario)**: Centraliza as informações dos participantes da rede, armazenando dados como:
+  - Nome
+  - Nome de perfil
+  - Email
+  - Senha
+  - Data de nascimento  
+  É uma entidade essencial que se relaciona diretamente com outras funcionalidades da rede.
+
+- **Postagens (Posts)**: Representa as publicações feitas pelos usuários. Cada postagem contém:
+  - ID do autor
+  - Conteúdo em texto
+  - Imagens
+  - Data de publicação  
+  A entidade está diretamente relacionada aos comentários e curtidas.
+
+- **Comentários (Comentarios)**: Permite que os usuários interajam com as postagens, registrando:
+  - Texto do comentário
+  - Usuário que comentou
+  - ID da postagem associada
+
+- **Curtidas (Likes)**: Gerencia as reações às postagens, registrando:
+  - O usuário que curtiu
+  - A postagem associada
+
+- **Mensagens (Mensagens)**: Responsável por armazenar as trocas de mensagens privadas entre os usuários, incluindo:
+  - Remetente
+  - Destinatário
+  - Conteúdo da mensagem (texto ou imagem)
+
+- **Amigos (Amigos)**: Gerencia as relações de amizade entre os usuários, registrando:
+  - Quais usuários estão conectados como amigos.
+  
+
+## **Relações**
+
+1. **Usuário e Postagens**:  
+   - Um usuário pode criar várias postagens.  
+   - Cada postagem pertence a apenas um usuário.
+
+2. **Postagens e Comentários**:  
+   - Uma postagem pode ter vários comentários.  
+   - Cada comentário pertence a uma única postagem.
+
+3. **Postagens e Curtidas**:  
+   - Uma postagem pode receber várias curtidas.  
+   - Cada curtida é feita por um único usuário.
+
+4. **Usuário e Mensagens**:  
+   - Os usuários podem enviar e receber várias mensagens uns dos outros.
+
+5. **Usuário e Amigos**:  
+   - Um usuário pode ter vários amigos.  
+   - As relações de amizade são bidirecionais.
+
+
+### Tabelas do Banco de Dados
 
 #### Tabela de Usuários
-![Tabela de Usuários da Rede Social](imagens/tabela_usuarios_rede_social.png)
+![Tabela de Usuários da Rede Social](https://github.com/Maarzano/C-digos-C---Curso/blob/55432cdfe49f1791eed187700b568d7c64f8bc7d/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Imagens/TabelasRedeSocial/usu%C3%A1rio.png)
 
 #### Tabela de Postagens
-![Tabela de Postagens da Rede Social](imagens/tabela_postagens_rede_social.png)
+![Tabela de Postagens da Rede Social](https://github.com/Maarzano/C-digos-C---Curso/blob/55432cdfe49f1791eed187700b568d7c64f8bc7d/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Imagens/TabelasRedeSocial/Post.png)
 
 #### Tabela de Amigos
-![Tabela de Amigos da Rede Social](imagens/tabela_amigos_rede_social.png)
+![Tabela de Amigos da Rede Social](https://github.com/Maarzano/C-digos-C---Curso/blob/55432cdfe49f1791eed187700b568d7c64f8bc7d/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Imagens/TabelasRedeSocial/Amigo.png)
+
+#### Tabela de Comentário
+![Tabela de comentário da Rede Social](https://github.com/Maarzano/C-digos-C---Curso/blob/55432cdfe49f1791eed187700b568d7c64f8bc7d/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Imagens/TabelasRedeSocial/Coment%C3%A1rio.png)
+
+#### Tabela de Like
+![Tabela de Like da Rede Social](https://github.com/Maarzano/C-digos-C---Curso/blob/55432cdfe49f1791eed187700b568d7c64f8bc7d/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Imagens/TabelasRedeSocial/Likes.png)
+
+#### Tabela de Mensagem
+![Tabela de Mensagem da Rede Social](https://github.com/Maarzano/C-digos-C---Curso/blob/55432cdfe49f1791eed187700b568d7c64f8bc7d/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Imagens/TabelasRedeSocial/Mensagem.png)
+
+### **Relações de Chaves Primárias e Estrangeiras:**
+
+- **Usuário (PK)** → **Curtidas (FK)**: A chave primária da tabela **Usuário** (`IDUser`) é usada como chave estrangeira na tabela **Curtidas** através da restrição de chave estrangeira `FK_UserID`.
+
+- **Postagens (PK)** → **Curtidas (FK)**: A chave primária da tabela **Postagens** (`IDpost`) é usada como chave estrangeira na tabela **Curtidas** através da restrição de chave estrangeira `FK_PostID`.
+
+- **Usuário (PK)** → **Comentários (FK)**: A chave primária da tabela **Usuário** (`IDUser`) é usada como chave estrangeira na tabela **Comentários** através da restrição de chave estrangeira `FK_UserID`.
+
+- **Postagens (PK)** → **Comentários (FK)**: A chave primária da tabela **Postagens** (`IDpost`) é usada como chave estrangeira na tabela **Comentários** através da restrição de chave estrangeira `FK_PostID`.
+
+- **Usuário (PK)** → **Mensagens (FK)**: A chave primária da tabela **Usuário** (`IDUser`) é usada como chave estrangeira na tabela **Mensagens** através da restrição de chave estrangeira `FK_SenderID` (para o remetente) e `FK_ReceiverID` (para o destinatário).
+
+- **Usuário (PK)** → **Amigos (FK)**: A chave primária da tabela **Usuário** (`IDUser`) é usada como chave estrangeira na tabela **Amigos** através da restrição de chave estrangeira `FK_UserID1` (para um usuário) e `FK_UserID2` (para o outro usuário).
 
 ---
 
@@ -201,21 +281,49 @@ O banco de dados da biblioteca foi projetado para gerenciar as informações sob
 
 #### Modelo Conceitual
 
-![Modelo Conceitual da Oficina Mecânica](imagens/modelo_conceitual_oficina_mecanica.png)
+![Modelo Conceitual da Oficina Mecânica](https://github.com/Maarzano/C-digos-C---Curso/blob/55432cdfe49f1791eed187700b568d7c64f8bc7d/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Imagens/Diagramas/DiagramaOficina.png)
 
 #### Descrição do Modelo Conceitual:
-*Descrever o modelo conceitual e o relacionamento entre as tabelas.*
+
+O banco de dados foi projetado para gerenciar informações relacionadas a clientes, veículos, serviços e ordens de serviço. O modelo conceitual é composto pelas seguintes entidades principais:
+
+- **Cliente**: Contém informações sobre os clientes, incluindo CEP, telefone, CPF e nome.
+- **Veículo**: Armazena dados sobre os veículos dos clientes, como modelo, placa e identificação do cliente proprietário.
+- **Serviços**: Registra os serviços oferecidos, incluindo nome do serviço e valor.
+- **Ordem de Serviço**: Representa o registro de ordens de serviço, armazenando o status, veículo associado, serviço prestado e o funcionário responsável.
+- **Funcionário (CLT)**: Armazena informações sobre os funcionários, incluindo CEP, telefone e CPF.
+
+---
+
+#### Relações:
+- **Cliente → Veículo**: Um cliente pode possuir vários veículos. (Relacionamento 1:N)
+- **Veículo → Ordem de Serviço**: Cada veículo pode estar associado a várias ordens de serviço. (Relacionamento 1:N)
+- **Serviços → Ordem de Serviço**: Um serviço pode ser associado a várias ordens de serviço. (Relacionamento 1:N)
+- **Funcionário (CLT) → Ordem de Serviço**: Um funcionário pode estar responsável por várias ordens de serviço. (Relacionamento 1:N)
+
 
 ### Tabelas
 
 #### Tabela de Clientes
-![Tabela de Clientes da Oficina Mecânica](imagens/tabela_clientes_oficina_mecanica.png)
+![Tabela de Clientes da Oficina Mecânica](https://github.com/Maarzano/C-digos-C---Curso/blob/55432cdfe49f1791eed187700b568d7c64f8bc7d/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Imagens/TabelasOficina/TabelasCliente.png)
 
 #### Tabela de Serviços
-![Tabela de Serviços da Oficina Mecânica](imagens/tabela_servicos_oficina_mecanica.png)
+![Tabela de Serviços da Oficina Mecânica](https://github.com/Maarzano/C-digos-C---Curso/blob/55432cdfe49f1791eed187700b568d7c64f8bc7d/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Imagens/TabelasOficina/TabelaServi%C3%A7os.png)
 
 #### Tabela de Veículos
-![Tabela de Veículos da Oficina Mecânica](imagens/tabela_veiculos_oficina_mecanica.png)
+![Tabela de Veículos da Oficina Mecânica](https://github.com/Maarzano/C-digos-C---Curso/blob/55432cdfe49f1791eed187700b568d7c64f8bc7d/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Imagens/TabelasOficina/TabelaVe%C3%ADculos.png)
+
+#### Tabela de OrdemServiço
+![Tabela de OrdemServiço da Oficina Mecânica](https://github.com/Maarzano/C-digos-C---Curso/blob/55432cdfe49f1791eed187700b568d7c64f8bc7d/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Imagens/TabelasOficina/TabelaOrdemServi%C3%A7os.png)
+
+#### Tabela de CLT
+![Tabela de CLTda Oficina Mecânica](https://github.com/Maarzano/C-digos-C---Curso/blob/55432cdfe49f1791eed187700b568d7c64f8bc7d/Trabalhos/Trabalho%20Cria%C3%A7%C3%A3o%20dos%20Bancos/Imagens/TabelasOficina/TabelaCLT.png)
+
+### Relações de Chaves Primárias e Estrangeiras:
+* **Cliente(PK) → Veículo(FK)**: A chave primária da tabela `Cliente` (IDcliente) é usada como chave estrangeira na tabela `Veículo` através da restrição de chave estrangeira `FK_Cliente`.
+* **Veículo(PK) → Ordem de Serviço(FK)**: A chave primária da tabela `Veículo` (IDveiculo) é usada como chave estrangeira na tabela `Ordem de Serviço` através da restrição de chave estrangeira `FK_Veiculo`.
+* **Serviços(PK) → Ordem de Serviço(FK)**: A chave primária da tabela `Serviços` (IDserviços) é usada como chave estrangeira na tabela `Ordem de Serviço` através da restrição de chave estrangeira `FK_Serviços`.
+* **Funcionário (CLT)(PK) → Ordem de Serviço(FK)**: A chave primária da tabela `Funcionário (CLT)` (IDclt) é usada como chave estrangeira na tabela `Ordem de Serviço` através da restrição de chave estrangeira `FK_CLT`.
 
 ---
 
@@ -236,7 +344,9 @@ A contribuição de cada integrante foi essencial para a criação dos bancos de
 - Abra o SQL Server Management Studio (SSMS) e conecte-se ao servidor local ou remoto.
 
 ## 3. Criação do Banco de Dados
-- Para cada banco de dados (Música, Biblioteca, Rede Social, Handebol e Oficina Mecânica), execute os scripts de criação fornecidos. Eles incluem a definição das tabelas e as restrições de chaves primárias e estrangeiras.
+- Para cada banco de dados (Música, Biblioteca, Rede Social, Handebol e Oficina Mecânica), execute as Querys de criação fornecidos. Elas incluem a definição das tabelas e as restrições de chaves primárias e estrangeiras.
+- Tem também arquivos na pasta Banco de Dados de cada db citado, tendo 2 arquivos, um é o script e o outro é um backup, você consegue usar os dois para poder criar cada um dos DBs.
+
 ### 1. Banco de Dados Músicas
     ```sql
     USE [master]
