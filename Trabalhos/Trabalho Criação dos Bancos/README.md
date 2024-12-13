@@ -1317,6 +1317,7 @@ A contribuição de cada integrante foi essencial para a criação dos bancos de
     (12, 11, 'Também estou com saudades.', NULL),
     (13, 14, 'Feliz aniversário!', NULL),
     (14, 13, 'Muito obrigado!', NULL),
+    (15, 1, 'Oi, podemos conversar?', NULL);
 ---
 ## 5. Banco de Dados Mecânica
     ```sql
