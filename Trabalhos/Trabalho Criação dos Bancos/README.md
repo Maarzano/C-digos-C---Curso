@@ -237,7 +237,7 @@ A contribuição de cada integrante foi essencial para a criação dos bancos de
 
 ## 3. Criação do Banco de Dados
 - Para cada banco de dados (Música, Biblioteca, Rede Social, Handebol e Oficina Mecânica), execute os scripts de criação fornecidos. Eles incluem a definição das tabelas e as restrições de chaves primárias e estrangeiras.
-### 1. Bancoo de Dados Músicas
+### 1. Banco de Dados Músicas
     ```sql
     USE [master]
     GO
@@ -1321,7 +1321,250 @@ A contribuição de cada integrante foi essencial para a criação dos bancos de
 ---
 ## 5. Banco de Dados Mecânica
     ```sql
-    
+    CREATE DATABASE OFICINA04;
+
+    CREATE TABLE Cliente (
+    IDcliente INT IDENTITY (1,1) PRIMARY KEY ,
+    CEP VARCHAR(50),
+    TELEFONE INT,
+    CPF VARCHAR(11),
+    Nome VARCHAR(50)
+    );
+
+    GO
+
+    CREATE TABLE Veiculo (
+    IDveiculo INT IDENTITY (1,1) PRIMARY KEY ,
+    Modelo VARCHAR(50),
+    Placa VARCHAR(7),
+    IDcliente int,
+    CONSTRAINT FK_IDcliente FOREIGN KEY (IDcliente)
+                            REFERENCES Cliente(IDcliente)
+    );
+
+    GO
+
+    SELECT *
+    FROM Veiculo;
+
+    CREATE TABLE Serviços (
+    IDserviços INT IDENTITY (1,1) PRIMARY KEY ,
+    ServiçoSele VARCHAR(50),
+    Valor MONEY
+    );
+
+    GO
+
+    CREATE TABLE CLT (
+    IDclt INT IDENTITY (1,1) PRIMARY KEY ,
+    CEP VARCHAR(50),
+    Telefone VARCHAR(15),
+    CPF VARCHAR(11)
+    );
+
+    GO
+
+    CREATE TABLE OrdemServiço (
+    IDordem INT IDENTITY (1,1) PRIMARY KEY ,
+    StatusServ VARCHAR(20),
+    IDveiculo INT,
+    IDserviços INT,
+    IDclt INT,
+    CONSTRAINT FK_IDveiculo FOREIGN KEY (IDveiculo)
+                            REFERENCES Veiculo(IDveiculo),
+    CONSTRAINT FK_IDserviços FOREIGN KEY (IDserviços)
+                            REFERENCES Serviços(IDserviços),
+    CONSTRAINT FK_IDclt FOREIGN KEY (IDclt)
+                            REFERENCES CLT(IDclt)        
+    );
+
+    Go
+
+
+    INSERT INTO Cliente (CEP, TELEFONE, CPF, Nome)
+    VALUES
+    ('12345-678', '912345678', '12345678901', 'João Silva'),
+        ('98765-432', '987654321', '98765432100', 'Maria Oliveira'),
+        ('54321-876', '934567890', '45678912345', 'Carlos Pereira'),
+        ('11223-445', '963258745', '11223344556', 'Fernanda Costa'),
+        ('66777-889', '912347654', '66778899001', 'Pedro Santos'),
+        ('23456-789', '998765432', '23456789012', 'Luciana Almeida'),
+        ('34567-890', '934567890', '34567890123', 'Marcos Lima'),
+        ('45678-901', '912346789', '45678901234', 'Juliana Souza'),
+        ('56789-012', '987654321', '56789012345', 'Paulo Costa'),
+        ('67890-123', '923456789', '67890123456', 'Tatiane Rocha'),
+        ('78901-234', '934567890', '78901234567', 'Felipe Martins'),
+        ('89012-345', '912345678', '89012345678', 'Renata Oliveira'),
+        ('90123-456', '998765432', '90123456789', 'Ricardo Barbosa'),
+        ('10234-567', '967891234', '10234567890', 'Ana Costa'),
+        ('21345-678', '912347890', '21345678901', 'Eduardo Souza');
+
+    GO
+
+    INSERT INTO Veiculo (Modelo, Placa, IDcliente)
+    VALUES
+        ('Fusca', 'ABC1234', 1),
+        ('Gol', 'DEF5678', 2),
+        ('Civic', 'GHI9101', 3),
+        ('HB20', 'JKL1122', 4),
+        ('Cruze', 'MNO3344', 5),
+        ('Onix', 'PQR5566', 6),
+        ('Corolla', 'STU7788', 7),
+        ('Kwid', 'VWX9900', 8),
+        ('S10', 'YZA2233', 9),
+        ('Saveiro', 'BCD4455', 10),
+        ('Civic', 'EFG6677', 11),
+        ('Fusca', 'HIJ8899', 12),
+        ('Focus', 'KLM1001', 13),
+        ('Tiguan', 'NOP2234', 14),
+        ('Mobi', 'QRS4456', 15);
+
+    GO
+
+    INSERT INTO Serviços (ServiçoSele, Valor)
+    VALUES
+        ('Troca de óleo', 120.00),
+        ('Alinhamento', 80.00),
+        ('Balanceamento', 60.00),
+        ('Troca de pastilhas de freio', 150.00),
+        ('Troca de pneu', 200.00),
+        ('Lavagem completa', 50.00),
+        ('Troca de bateria', 250.00),
+        ('Troca de filtro de ar', 40.00),
+        ('Reparo de motor', 800.00),
+        ('Troca de correia dentada', 350.00),
+        ('Inspeção veicular', 100.00),
+        ('Serviço de funilaria', 600.00),
+        ('Troca de vela de ignição', 90.00),
+        ('Troca de óleo de câmbio', 220.00),
+        ('Instalação de rádio no carro', 120.00);
+
+    GO
+
+    INSERT INTO CLT (CEP, Telefone, CPF)
+    VALUES
+        ('12345-678', '912345678', '12345678901'),
+        ('98765-432', '987654321', '98765432100'),
+        ('54321-876', '934567890', '45678912345'),
+        ('11223-445', '963258745', '11223344556'),
+        ('66777-889', '912347654', '66778899001'),
+        ('23456-789', '998765432', '23456789012'),
+        ('34567-890', '934567890', '34567890123'),
+        ('45678-901', '912346789', '45678901234'),
+        ('56789-012', '987654321', '56789012345'),
+        ('67890-123', '923456789', '67890123456'),
+        ('78901-234', '934567890', '78901234567'),
+        ('89012-345', '912345678', '89012345678'),
+        ('90123-456', '998765432', '90123456789'),
+        ('10234-567', '967891234', '10234567890'),
+        ('21345-678', '912347890', '21345678901');
+
+    GO
+
+    INSERT INTO OrdemServiço (StatusServ, IDveiculo, IDserviços,IDclt)
+    VALUES
+        ('Em andamento', 2, 1,5),
+        ('Concluído', 3, 2,3),
+        ('Em andamento', 4, 3,7),
+        ('Concluído', 5, 4,10),
+        ('Em andamento', 6, 5,12),
+        ('Concluído', 7, 6,5),
+        ('Em andamento', 8, 7,4),
+        ('Concluído', 9, 8,3),
+        ('Em andamento', 10, 9,2),
+        ('Concluído', 11, 10,1),
+        ('Em andamento', 12, 11,12),
+        ('Concluído', 13, 12,13),
+        ('Em andamento', 14, 13,8),
+        ('Concluído', 15, 14,9),
+        ('Em andamento', 15, 15,8);
+
+    GO
+
+    UPDATE OrdemServiço
+    SET IDclt = 1
+    WHERE IDordem = 2;
+
+    UPDATE OrdemServiço
+    SET IDclt = 2
+    WHERE IDordem = 3;
+
+    UPDATE OrdemServiço
+    SET IDclt = 3
+    WHERE IDordem = 4;
+
+    UPDATE OrdemServiço
+    SET IDclt = 4
+    WHERE IDordem = 5;
+
+    UPDATE OrdemServiço
+    SET IDclt = 5
+    WHERE IDordem = 6;
+
+    UPDATE OrdemServiço
+    SET IDclt = 6
+    WHERE IDordem = 7;
+
+    UPDATE OrdemServiço
+    SET IDclt = 7
+    WHERE IDordem = 8;
+
+    UPDATE OrdemServiço
+    SET IDclt = 8
+    WHERE IDordem = 9;
+
+    UPDATE OrdemServiço
+    SET IDclt = 9
+    WHERE IDordem = 10;
+
+    UPDATE OrdemServiço
+    SET IDclt = 10
+    WHERE IDordem = 11;
+
+    UPDATE OrdemServiço
+    SET IDclt = 11
+    WHERE IDordem = 12;
+
+    UPDATE OrdemServiço
+    SET IDclt = 12
+    WHERE IDordem = 13;
+
+    UPDATE OrdemServiço
+    SET IDclt = 13
+    WHERE IDordem = 14;
+
+    UPDATE OrdemServiço
+    SET IDclt = 14
+    WHERE IDordem = 15;
+
+    UPDATE OrdemServiço
+    SET IDclt = 15
+    WHERE IDordem = 16;
+
+    GO
+
+    SELECT *
+    FROM Cliente;
+
+    GO
+
+    SELECT *
+    FROM Serviços;
+
+    GO
+
+    SELECT *
+    FROM CLT;
+
+    GO
+
+    SELECT *
+    FROM Veiculo;
+
+    GO
+
+    SELECT *
+    FROM OrdemServiço;  
 ---
 
 ## Licença
