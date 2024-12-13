@@ -128,59 +128,22 @@ O banco de dados da biblioteca foi projetado para gerenciar as informações sob
 O banco de dados foi projetado para gerenciar informações de uma rede social fictícia, permitindo interação entre os usuários por meio de postagens, comentários, curtidas, mensagens e relações de amizade. As principais entidades do modelo são:
 
 
-- **Usuário (Usuario)**: Centraliza as informações dos participantes da rede, armazenando dados como:
-  - Nome
-  - Nome de perfil
-  - Email
-  - Senha
-  - Data de nascimento  
-  É uma entidade essencial que se relaciona diretamente com outras funcionalidades da rede.
+- **Usuários**: Centraliza as informações dos participantes da rede, armazenando dados como nome, nome de perfil, email, senha e data de nascimento. É uma entidade essencial que se relaciona diretamente com outras funcionalidades da rede.
+- **Postagens**: Representa as publicações feitas pelos usuários. Cada postagem contém o ID do autor, conteúdo em texto, imagens e data de publicação. A entidade está diretamente relacionada aos comentários e curtidas.
+- **Comentários**: Permite que os usuários interajam com as postagens, registrando o texto do comentário, o usuário que comentou e o ID da postagem associada.
+- **Curtidas**: Gerencia as reações às postagens, registrando o usuário que curtiu e a postagem associada.
+- **Mensagens**: Responsável por armazenar as trocas de mensagens privadas entre os usuários, incluindo remetente, destinatário e o conteúdo da mensagem (texto ou imagem).
+- **Amigos**: Gerencia as relações de amizade entre os usuários, registrando quais usuários estão conectados como amigos.
 
-- **Postagens (Posts)**: Representa as publicações feitas pelos usuários. Cada postagem contém:
-  - ID do autor
-  - Conteúdo em texto
-  - Imagens
-  - Data de publicação  
-  A entidade está diretamente relacionada aos comentários e curtidas.
+---
 
-- **Comentários (Comentarios)**: Permite que os usuários interajam com as postagens, registrando:
-  - Texto do comentário
-  - Usuário que comentou
-  - ID da postagem associada
+### Relações:
+- **Usuário → Postagens**: Um usuário pode criar várias postagens. Cada postagem pertence a apenas um usuário. (Relacionamento 1:N)
+- **Postagens → Comentários**: Uma postagem pode ter vários comentários. Cada comentário pertence a uma única postagem. (Relacionamento 1:N)
+- **Postagens → Curtidas**: Uma postagem pode receber várias curtidas. Cada curtida é feita por um único usuário. (Relacionamento 1:N)
+- **Usuário → Mensagens**: Os usuários podem enviar e receber várias mensagens uns dos outros. (Relacionamento N:N)
+- **Usuário → Amigos**: Um usuário pode ter vários amigos, e as relações de amizade são bidirecionais. (Relacionamento N:N)
 
-- **Curtidas (Likes)**: Gerencia as reações às postagens, registrando:
-  - O usuário que curtiu
-  - A postagem associada
-
-- **Mensagens (Mensagens)**: Responsável por armazenar as trocas de mensagens privadas entre os usuários, incluindo:
-  - Remetente
-  - Destinatário
-  - Conteúdo da mensagem (texto ou imagem)
-
-- **Amigos (Amigos)**: Gerencia as relações de amizade entre os usuários, registrando:
-  - Quais usuários estão conectados como amigos.
-  
-
-## **Relações**
-
-1. **Usuário e Postagens**:  
-   - Um usuário pode criar várias postagens.  
-   - Cada postagem pertence a apenas um usuário.
-
-2. **Postagens e Comentários**:  
-   - Uma postagem pode ter vários comentários.  
-   - Cada comentário pertence a uma única postagem.
-
-3. **Postagens e Curtidas**:  
-   - Uma postagem pode receber várias curtidas.  
-   - Cada curtida é feita por um único usuário.
-
-4. **Usuário e Mensagens**:  
-   - Os usuários podem enviar e receber várias mensagens uns dos outros.
-
-5. **Usuário e Amigos**:  
-   - Um usuário pode ter vários amigos.  
-   - As relações de amizade são bidirecionais.
 
 
 ### Tabelas do Banco de Dados
